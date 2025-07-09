@@ -1,82 +1,123 @@
 import streamlit as st
-import os
 import json
 import re
 from pathlib import Path
 
-# --- 기본 매핑 설정 ---
-LLM_LABELS = {
-    "llm_a": "claude",
-    "llm_b": "gemini",
-    "llm_c": "(unused)"
+# 🔧 사용자 정의: JSON 폴더 경로
+DATA_PATH = Path("results")
+
+# 🔁 모델 키 → 이름 매핑
+MODEL_MAP = {
+    "llm_a": "claude_sonnet4",
+    "llm_b": "chatgpt4o",
+    "llm_c": "gemini_pro"
 }
 
-LLM_COLORS = {
-    "claude": "#FFF8DC",
-    "gemini": "#E6FFE6",
-    "(unused)": "#f0f0f0"
-}
+# 📐 페이지 설정
+st.set_page_config(layout="wide", page_title="AgentAI Viewer", page_icon="🧠")
 
-# --- JSON 로딩 ---
-@st.cache_data
-def load_json_files(directory):
-    files = [f for f in os.listdir(directory) if f.endswith(".json")]
-    data = []
-    for f in files:
-        with open(os.path.join(directory, f), "r", encoding="utf-8") as j:
-            data.append(json.load(j))
-    return data
+# ✅ 📁 페이지 선택 추가
+st.sidebar.markdown("### 📁 페이지 선택")
+page = st.sidebar.radio("페이지를 선택하세요", ["응답 비교 보기", "향후 피드백 방향성"])
 
-# --- Streamlit UI 구성 ---
-st.set_page_config(layout="wide")
-st.title("🧠 LLM CNAPS Evaluation Viewer")
+# ───────────────────────────────────────────────────────────
+# ✅ 1. 메인 페이지: 응답 비교 보기
+# ───────────────────────────────────────────────────────────
+if page == "응답 비교 보기":
+    # 📦 모든 JSON 파일 로드
+    json_files = sorted(DATA_PATH.glob("*.json"))
+    query_map = {f.stem: f for f in json_files}
 
-# JSON 폴더 경로 입력
-json_dir = st.sidebar.text_input("📁 JSON Directory", value="./results")
-json_data = load_json_files(json_dir)
+    # 🧭 사이드바에서 Query 선택
+    st.sidebar.title("🔍 Query Navigation")
+    selected_query = st.sidebar.selectbox("Select Query", list(query_map.keys()))
 
-query_ids = [item["query_id"] for item in json_data]
-selected_query = st.sidebar.selectbox("🔍 Select Query", query_ids)
+    # 📋 평가 기준 추가
+    with st.sidebar.expander("📋 평가 기준 보기"):
+        st.markdown("""
+**🧪 평가 기준 (각 항목당 10점 만점)**
 
-# 해당 쿼리 선택
-query_obj = next(item for item in json_data if item["query_id"] == selected_query)
+| 번호 | 항목 | 설명 |
+|------|------|------|
+| 1 | 명확성 및 가독성 | 설명이 명확하고 구조적으로 잘 정리되었는가? |
+| 2 | 정확성 및 완전성 | 요구된 모든 항목이 빠짐없이 포함되었는가? |
+| 3 | CNAPS 스타일 워크플로우 | 분기(branch), 병합(merge) 등 시냅스 구조가 반영되었는가? |
+| 4 | 제공 모델만 사용 | 문제에서 제시한 모델만을 사용했는가? |
+| 5 | 해석 가능성과 설득력 | 선택 모델의 근거와 설명이 설득력 있었는가? |
+""")
 
-# 쿼리 표시
-st.markdown("## 📝 Query")
-st.markdown(f"```\n{query_obj['query_text']}\n```")
+    # 📄 JSON 로드
+    with open(query_map[selected_query], 'r') as f:
+        data = json.load(f)
 
-# 응답 렌더링
-st.markdown("---")
-st.markdown("## 🤖 LLM Responses")
-responses = query_obj["responses"]
-columns = st.columns(2)
+    query_text = data.get("query_text", "")
+    responses = data.get("responses", {})
+    votes = data.get("votes", {})
+    majority = data.get("majority_vote", "")
 
-for i, llm_key in enumerate(["llm_a", "llm_b"]):
-    model_name = LLM_LABELS[llm_key]
-    with columns[i]:
-        st.markdown(f"### {model_name.title()} Response")
-        st.markdown(
-            f"<div style='background-color:{LLM_COLORS[model_name]}; padding:10px; border-radius:5px'>"
-            f"<pre style='white-space:pre-wrap'>{responses[llm_key]}</pre></div>",
-            unsafe_allow_html=True
-        )
+    # 🎯 질문 추출
+    ask_match = re.search(r"A user asks:\n[\"“](.+?)[\"”]", query_text, re.DOTALL)
+    user_ask = ask_match.group(1).strip() if ask_match else "(사용자 질문을 찾을 수 없습니다.)"
 
-# 최종 선택 결과
-st.markdown("---")
-st.markdown("## 🏆 Final Selection")
+    # 🎯 모델 목록 추출
+    model_block_match = re.search(r"### Recommended AI Models:\s*\n(.+)", query_text, re.DOTALL)
+    models_raw = model_block_match.group(1).strip() if model_block_match else "(모델 목록 없음)"
+    models_clean = re.findall(r"- \*\*(.*?)\*\*\n\s*Paper: (.*)", models_raw)
+    models_md = "\n".join([f"- **{name}**\n  Paper: {link}" for name, link in models_clean]) if models_clean else models_raw
 
-best_model = LLM_LABELS.get(query_obj.get("best_by_score"), "unknown")
-majority_vote = LLM_LABELS.get(query_obj.get("majority_vote"), "unknown")
+    # 📝 사용자 질문 표시
+    st.markdown("## 🙋 사용자 질문")
+    st.info(f"**\"{user_ask}\"**")
 
-st.success(f"**Best by Score:** {best_model.title()}")
-st.info(f"**Majority Vote:** {majority_vote.title()}")
+    # 🤖 모델 목록 표시
+    st.markdown("## 🧠 추천된 AI 모델 목록")
+    st.code(models_md, language="markdown")
 
-# 각 모델이 선택한 이유
-st.markdown("---")
-st.markdown("## 💬 Rationales by Model")
-rationales = query_obj.get("rationales", {})
-for model_key, text in rationales.items():
-    readable_name = model_key.split("/")[-1]  # e.g., "gpt-4o"
-    with st.sidebar:
-        st.markdown(f"### 🧩 {readable_name} Rationale")
-        st.markdown(f"<div style='background-color:#f4f4f4; padding:8px; border-radius:5px'><small>{text}</small></div>", unsafe_allow_html=True)
+    # 📊 모델 응답 비교
+    st.markdown("## 🤖 Model Responses")
+    for raw_key in ["llm_a", "llm_b", "llm_c"]:
+        response = responses.get(raw_key, "(No response found)")
+        mapped_name = MODEL_MAP.get(raw_key, raw_key)
+        voted_by = [model for model, v in votes.items() if v == raw_key]
+        majority_flag = "🌟 **Majority Vote**" if raw_key == majority else ""
+
+        with st.expander(f"🧠 {mapped_name}", expanded=True):
+            st.markdown(response, unsafe_allow_html=True)
+            st.markdown(f"✅ **Voted by**: {', '.join(voted_by) if voted_by else 'None'}")
+            if majority_flag:
+                st.markdown(majority_flag)
+
+# ───────────────────────────────────────────────────────────
+# ✅ 2. 추가 페이지: 향후 피드백 방향성
+# ───────────────────────────────────────────────────────────
+elif page == "향후 피드백 방향성":
+    st.title("🧭 향후 피드백 방향성 및 개선 전략")
+
+    st.markdown("""
+---
+
+### 🔎 문제점 정리
+
+1. **Mermaid 기반 흐름도 생성 오류**  
+   일부 LLM(특히 Gemini)은 Mermaid 형식의 시각적 flow 생성을 안정적으로 처리하지 못합니다.  
+   → 연결 구조만 요구했음에도 불필요한 입력 채널이나 low-level 정보가 과도하게 포함됩니다.
+
+2. **Low-level 중심 응답 경향**  
+   사용자는 high-level 중심의 CNAPS-style 흐름을 요구했으나, 모델은 처리 세부 단계에 집중하여 응답의 가독성과 전략성이 저하됩니다.
+
+3. **RAG 추천 모델의 과사용**  
+   RAG로 Top-3 모델을 추천했을 때, 대부분 1~2개는 유효하지만  
+   나머지 불필요한 모델까지 억지로 사용하려는 경향이 나타났습니다.
+
+---
+
+### ✅ 해결 방안: Refine 기반 개선 구조
+
+- 사용자의 피드백을 기반으로 LLM이 동일 질문에 대해 응답을 다시 생성
+- Mermaid 형식, 불필요한 모델 제거, high-level 구조 강조 등 문제를 반영하여 품질을 향상
+- 향후 개선 응답은 기존 응답과 비교하고 선택할 수 있는 구조로 설계
+
+📌 이 루프를 통해 LLM 답변의 구조화, 간결성, 전략성을 지속적으로 개선할 수 있습니다.
+
+---
+""") 
