@@ -121,7 +121,7 @@ elif page == "향후 피드백 방향성":
 
 elif page == "특정 결과 보기 (테스트 전용)":
     st.title("🧪 단일 JSON 평가 결과 뷰어 (테스트용)")
-    test_file = st.sidebar.text_input("JSON 파일 경로를 입력하세요", value="Inpainting-CTSDG-Places2.json")
+    test_file = st.sidebar.text_input("JSON 파일 경로를 입력하세요", value="./results/single_result.json")
 
     if os.path.exists(test_file):
         with open(test_file, "r", encoding="utf-8") as f:
