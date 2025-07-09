@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 # 🔧 사용자 정의: JSON 폴더 경로
-DATA_PATH = Path("/home/cvlab/Desktop/AgentAI/eval/results")
+DATA_PATH = Path("results")
 
 # 🔁 모델 키 → 이름 매핑
 MODEL_MAP = {
