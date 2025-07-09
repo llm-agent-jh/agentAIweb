@@ -1,95 +1,92 @@
 import streamlit as st
+import os
 import json
 import re
 from pathlib import Path
 
-# 🔧 사용자 정의: JSON 폴더 경로
-DATA_PATH = Path("results")
-
-# 🔁 모델 키 → 이름 매핑
-MODEL_MAP = {
-    "llm_a": "claude_sonnet4",
-    "llm_b": "chatgpt4o",
-    "llm_c": "gemini_pro"
+# --- 기본 매핑 설정 ---
+LLM_LABELS = {
+    "llm_a": "claude",
+    "llm_b": "gemini",
+    "llm_c": "(unused)"
 }
 
-# 📐 페이지 설정
-st.set_page_config(layout="wide", page_title="AgentAI Viewer", page_icon="🧠")
+LLM_COLORS = {
+    "claude": "#FFF8DC",
+    "gemini": "#E6FFE6",
+    "(unused)": "#f0f0f0"
+}
 
-# ✅ 📁 페이지 선택 추가
-st.sidebar.markdown("### 📁 페이지 선택")
-page = st.sidebar.radio("페이지를 선택하세요", ["응답 비교 보기", "향후 피드백 방향성"])
+# --- JSON 로딩 ---
+@st.cache_data
+def load_json_files(directory):
+    files = [f for f in os.listdir(directory) if f.endswith(".json")]
+    data = []
+    for f in files:
+        with open(os.path.join(directory, f), "r", encoding="utf-8") as j:
+            data.append(json.load(j))
+    return data
 
-# ───────────────────────────────────────────────────────────
-# ✅ 1. 메인 페이지: 응답 비교 보기
-# ───────────────────────────────────────────────────────────
+# --- Streamlit UI 구성 ---
+st.set_page_config(layout="wide")
+st.title("🧠 LLM CNAPS Evaluation Viewer")
+
+# JSON 폴더 경로 입력
+json_dir = st.sidebar.text_input("📁 JSON Directory", value="./results")
+json_data = load_json_files(json_dir)
+
+# 페이지 선택
+page = st.sidebar.radio("페이지를 선택하세요", ["응답 비교 보기", "향후 피드백 방향성", "특정 결과 보기 (테스트 전용)"])
+
 if page == "응답 비교 보기":
-    # 📦 모든 JSON 파일 로드
-    json_files = sorted(DATA_PATH.glob("*.json"))
-    query_map = {f.stem: f for f in json_files}
+    query_ids = [item["query_id"] for item in json_data]
+    selected_query = st.sidebar.selectbox("🔍 Select Query", query_ids)
 
-    # 🧭 사이드바에서 Query 선택
-    st.sidebar.title("🔍 Query Navigation")
-    selected_query = st.sidebar.selectbox("Select Query", list(query_map.keys()))
+    # 해당 쿼리 선택
+    query_obj = next(item for item in json_data if item["query_id"] == selected_query)
 
-    # 📋 평가 기준 추가
-    with st.sidebar.expander("📋 평가 기준 보기"):
-        st.markdown("""
-**🧪 평가 기준 (각 항목당 10점 만점)**
+    # 쿼리 표시
+    st.markdown("## 📝 Query")
+    st.markdown(f"```
+{query_obj['query_text']}
+```")
 
-| 번호 | 항목 | 설명 |
-|------|------|------|
-| 1 | 명확성 및 가독성 | 설명이 명확하고 구조적으로 잘 정리되었는가? |
-| 2 | 정확성 및 완전성 | 요구된 모든 항목이 빠짐없이 포함되었는가? |
-| 3 | CNAPS 스타일 워크플로우 | 분기(branch), 병합(merge) 등 시냅스 구조가 반영되었는가? |
-| 4 | 제공 모델만 사용 | 문제에서 제시한 모델만을 사용했는가? |
-| 5 | 해석 가능성과 설득력 | 선택 모델의 근거와 설명이 설득력 있었는가? |
-""")
+    # 응답 렌더링
+    st.markdown("---")
+    st.markdown("## 🤖 LLM Responses")
+    responses = query_obj["responses"]
+    columns = st.columns(2)
 
-    # 📄 JSON 로드
-    with open(query_map[selected_query], 'r') as f:
-        data = json.load(f)
+    for i, llm_key in enumerate(["llm_a", "llm_b"]):
+        model_name = LLM_LABELS[llm_key]
+        with columns[i]:
+            st.markdown(f"### {model_name.title()} Response")
+            st.markdown(
+                f"<div style='background-color:{LLM_COLORS[model_name]}; padding:10px; border-radius:5px'>"
+                f"<pre style='white-space:pre-wrap'>{responses[llm_key]}</pre></div>",
+                unsafe_allow_html=True
+            )
 
-    query_text = data.get("query_text", "")
-    responses = data.get("responses", {})
-    votes = data.get("votes", {})
-    majority = data.get("majority_vote", "")
+    # 최종 선택 결과
+    st.markdown("---")
+    st.markdown("## 🏆 Final Selection")
 
-    # 🎯 질문 추출
-    ask_match = re.search(r"A user asks:\n[\"“](.+?)[\"”]", query_text, re.DOTALL)
-    user_ask = ask_match.group(1).strip() if ask_match else "(사용자 질문을 찾을 수 없습니다.)"
+    best_model = LLM_LABELS.get(query_obj.get("best_by_score"), "unknown")
+    majority_vote = LLM_LABELS.get(query_obj.get("majority_vote"), "unknown")
 
-    # 🎯 모델 목록 추출
-    model_block_match = re.search(r"### Recommended AI Models:\s*\n(.+)", query_text, re.DOTALL)
-    models_raw = model_block_match.group(1).strip() if model_block_match else "(모델 목록 없음)"
-    models_clean = re.findall(r"- \*\*(.*?)\*\*\n\s*Paper: (.*)", models_raw)
-    models_md = "\n".join([f"- **{name}**\n  Paper: {link}" for name, link in models_clean]) if models_clean else models_raw
+    st.success(f"**Best by Score:** {best_model.title()}")
+    st.info(f"**Majority Vote:** {majority_vote.title()}")
 
-    # 📝 사용자 질문 표시
-    st.markdown("## 🙋 사용자 질문")
-    st.info(f"**\"{user_ask}\"**")
+    # 각 모델이 선택한 이유
+    st.markdown("---")
+    st.markdown("## 💬 Rationales by Model")
+    rationales = query_obj.get("rationales", {})
+    for model_key, text in rationales.items():
+        readable_name = model_key.split("/")[-1]  # e.g., "gpt-4o"
+        with st.sidebar:
+            st.markdown(f"### 🧩 {readable_name} Rationale")
+            st.markdown(f"<div style='background-color:#f4f4f4; padding:8px; border-radius:5px'><small>{text}</small></div>", unsafe_allow_html=True)
 
-    # 🤖 모델 목록 표시
-    st.markdown("## 🧠 추천된 AI 모델 목록")
-    st.code(models_md, language="markdown")
-
-    # 📊 모델 응답 비교
-    st.markdown("## 🤖 Model Responses")
-    for raw_key in ["llm_a", "llm_b", "llm_c"]:
-        response = responses.get(raw_key, "(No response found)")
-        mapped_name = MODEL_MAP.get(raw_key, raw_key)
-        voted_by = [model for model, v in votes.items() if v == raw_key]
-        majority_flag = "🌟 **Majority Vote**" if raw_key == majority else ""
-
-        with st.expander(f"🧠 {mapped_name}", expanded=True):
-            st.markdown(response, unsafe_allow_html=True)
-            st.markdown(f"✅ **Voted by**: {', '.join(voted_by) if voted_by else 'None'}")
-            if majority_flag:
-                st.markdown(majority_flag)
-
-# ───────────────────────────────────────────────────────────
-# ✅ 2. 추가 페이지: 향후 피드백 방향성
-# ───────────────────────────────────────────────────────────
 elif page == "향후 피드백 방향성":
     st.title("🧭 향후 피드백 방향성 및 개선 전략")
 
@@ -121,3 +118,32 @@ elif page == "향후 피드백 방향성":
 
 ---
 """)
+
+elif page == "특정 결과 보기 (테스트 전용)":
+    st.title("🧪 단일 JSON 평가 결과 뷰어 (테스트용)")
+    test_file = st.sidebar.text_input("JSON 파일 경로를 입력하세요", value="./results/single_result.json")
+
+    if os.path.exists(test_file):
+        with open(test_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        st.markdown("### 🙋 사용자 질문")
+        user_question = re.search(r'A user asks:\n["“](.+?)["”]', data.get("query_text", ""), re.DOTALL)
+        st.info(user_question.group(1) if user_question else data.get("query_text", "(질문 없음)"))
+
+        st.markdown("### 🤖 Claude 응답")
+        st.markdown(data["responses"].get("llm_a", "(없음)"))
+
+        st.markdown("### 🤖 Gemini 응답")
+        st.markdown(data["responses"].get("llm_b", "(없음)"))
+
+        st.markdown("---")
+        st.markdown("### 🏆 선택 결과")
+        st.markdown(f"**Best by Score:** {data.get('best_by_score', '-')}")
+        st.markdown(f"**Majority Vote:** {data.get('majority_vote', '-')}")
+
+        st.markdown("### 💬 각 모델의 선택 이유")
+        for k, v in data.get("rationales", {}).items():
+            st.markdown(f"**{k}**: {v}")
+    else:
+        st.warning("해당 경로의 JSON 파일이 존재하지 않습니다.")
