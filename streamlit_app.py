@@ -128,7 +128,7 @@ elif page == "향후 피드백 방향성":
 # ───────────────────────────────────────────────────────────
 elif page == "단일 파일 보기":
     st.title("🧪 단일 평가 JSON 결과 보기 (예: CTSDG 등)")
-    file_path = st.sidebar.text_input("📄 JSON 파일 경로", value="/mnt/data/Inpainting-CTSDG-Places2.json")
+    file_path = st.sidebar.text_input("📄 JSON 파일 경로", value="Inpainting-CTSDG-Places2.json")
 
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
