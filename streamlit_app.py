@@ -47,9 +47,7 @@ if page == "응답 비교 보기":
 
     # 쿼리 표시
     st.markdown("## 📝 Query")
-    st.markdown(f"```
-{query_obj['query_text']}
-```")
+    st.markdown("```\n" + query_obj['query_text'] + "\n```")
 
     # 응답 렌더링
     st.markdown("---")
