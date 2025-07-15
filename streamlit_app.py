@@ -87,25 +87,39 @@ if page == "응답 비교 보기":
 # ✅ 2. 향후 피드백 방향성
 # ───────────────────────────────────────────────────────────
 elif page == "향후 피드백 방향성":
-    st.title("🧭 향후 피드백 방향성 및 개선 전략")
+    st.title("📈 향후 피드백 방향성: RAG 성능 향상 중심 전략")
+
     st.markdown("""
 ---
 
-### 🔎 문제점 정리
+## 🎯 목표 재정의
 
-1. **Mermaid 기반 흐름도 생성 오류**
-2. **Low-level 중심 응답 경향**
-3. **RAG 추천 모델의 과사용**
+기존에는 출력 양식의 구조화와 CNAPS 스타일 응답 일관성에 초점을 맞췄다면,  
+**향후에는 Retrieval-Augmented Generation (RAG) 성능 향상 자체를 핵심 목표로 전환**합니다.
+
+---
+
+## 🧠 핵심 전략
+
+- 단순히 양식을 잘 맞추는 것에 그치지 않고,  
+  **정확하고 정보 기반의 응답을 생성할 수 있는 retrieval-aware fine-tuning** 또는  
+  **강건한 multi-hop retrieval chain 학습 구조**로 발전
 
 ---
 
-### ✅ 해결 방안
+## 📘 참고 사례 (성능 중심 RAG 연구)
 
-- 사용자 피드백 기반 LLM 응답 재생성
-- 구조 개선 및 복잡도 완화
-- 불필요한 모델 제거 및 간결한 CNAPS 구성 유도
+- [CoRAG (Chain-of-Retrieval)](https://arxiv.org/pdf/2501.14342): step-by-step 검색 흐름을 생성하며 응답 품질 극대화
+- RbFT: retrieval 오류에 강건한 fine-tuning 구조
+- Invar-RAG / OpenRAG: retriever와 generator를 end-to-end로 동시 최적화
+- IterKey: sparse retrieval에서도 iterative 방식으로 성능 보강
 
 ---
+
+## ✅ 요약
+
+앞으로는 **LLM이 단순 생성자가 아니라, 능동적 검색 행위자로 작동할 수 있도록**  
+retrieval을 포함한 학습 구조와 평가 방식을 강화하는 방향으로 피드백과 개선을 이어갈 예정입니다.
 """)
 
 # ───────────────────────────────────────────────────────────
