@@ -22,8 +22,7 @@ st.sidebar.markdown("### 📁 페이지 선택")
 page = st.sidebar.radio("페이지를 선택하세요", [
     "응답 비교 보기",
     "향후 피드백 방향성",
-    "단일 파일 보기",
-    "예측 결과 비교"  # ✅ 추가된 기능
+    "예측 결과 비교"
 ])
 
 # ───────────────────────────────────────────────────────────
@@ -94,70 +93,38 @@ elif page == "향후 피드백 방향성":
 
 ### 🔎 문제점 정리
 
-1. **Mermaid 기반 흐름도 생성 오류**  
-   일부 LLM(특히 Gemini)은 Mermaid 형식의 시각적 flow 생성을 안정적으로 처리하지 못합니다.
-
-2. **Low-level 중심 응답 경향**  
-   사용자는 high-level 중심의 CNAPS-style 흐름을 요구했으나, 모델은 처리 세부 단계에 집중하여 응답의 가독성과 전략성이 저하됩니다.
-
-3. **RAG 추천 모델의 과사용**  
-   RAG로 Top-3 모델을 추천했을 때, 대부분 1~2개는 유효하지만 나머지 불필요한 모델까지 억지로 사용하려는 경향이 나타났습니다.
+1. **Mermaid 기반 흐름도 생성 오류**
+2. **Low-level 중심 응답 경향**
+3. **RAG 추천 모델의 과사용**
 
 ---
 
 ### ✅ 해결 방안
 
-- 사용자의 피드백을 기반으로 LLM이 동일 질문에 대해 응답을 다시 생성
-- Mermaid 형식, 불필요한 모델 제거, high-level 구조 강조 등 문제를 반영하여 품질을 향상
+- 사용자 피드백 기반 LLM 응답 재생성
+- 구조 개선 및 복잡도 완화
+- 불필요한 모델 제거 및 간결한 CNAPS 구성 유도
 
 ---
 """)
 
 # ───────────────────────────────────────────────────────────
-# ✅ 3. 단일 파일 보기
-# ───────────────────────────────────────────────────────────
-elif page == "단일 파일 보기":
-    st.title("🧪 단일 평가 JSON 결과 보기")
-    file_path = st.sidebar.text_input("📄 JSON 파일 경로", value="Inpainting-CTSDG-Places2.json")
-
-    if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        st.markdown("## 🙋 사용자 질문")
-        st.markdown(data.get("query_text", "(질문 없음)"))
-
-        st.markdown("## 🤖 Claude 응답")
-        st.markdown(data.get("responses", {}).get("llm_a", "(없음)"))
-
-        st.markdown("## 🤖 Gemini 응답")
-        st.markdown(data.get("responses", {}).get("llm_b", "(없음)"))
-
-        st.markdown("## 🏆 최종 선택 결과")
-        st.markdown(f"**Best by Score:** {data.get('best_by_score', '-')}")
-        st.markdown(f"**Majority Vote:** {data.get('majority_vote', '-')}")
-
-        st.markdown("## 💬 각 모델의 평가 사유")
-        for k, v in data.get("rationales", {}).items():
-            st.markdown(f"**{k}**: {v}")
-    else:
-        st.warning("📁 해당 경로의 JSON 파일을 찾을 수 없습니다.")
-
-# ───────────────────────────────────────────────────────────
-# ✅ 4. 예측 결과 비교
+# ✅ 3. 예측 결과 비교
 # ───────────────────────────────────────────────────────────
 elif page == "예측 결과 비교":
     st.title("📊 LLM 예측 결과 vs 정답 비교")
 
-    pred_file_path = st.sidebar.text_input("📁 예측 JSON 경로", value="results/generated_predictions_extracted.json")
+    pred_file_path = "results/generated_predictions_extracted.json"
 
     if os.path.exists(pred_file_path):
         with open(pred_file_path, "r", encoding="utf-8") as f:
             prediction_data = json.load(f)
 
-        st.sidebar.markdown("### 🔢 항목 선택")
-        example_idx = st.sidebar.slider("항목 인덱스", 0, len(prediction_data) - 1, 0)
-        example = prediction_data[example_idx]
+        # 🔍 모델 이름 목록 추출
+        model_names = [ex["prompt"].split("\n")[-1].strip().strip('"') for ex in prediction_data]
+        selected_name = st.sidebar.selectbox("🔍 모델 질문 (요약)", model_names)
+        selected_index = model_names.index(selected_name)
+        example = prediction_data[selected_index]
 
         st.markdown("## 🙋 Prompt (User Input)")
         st.code(example["prompt"], language="markdown")
@@ -168,4 +135,4 @@ elif page == "예측 결과 비교":
         st.markdown("## ✅ Label (Ground Truth)")
         st.info(example["label"])
     else:
-        st.warning("📁 해당 JSON 경로를 찾을 수 없습니다.")
+        st.warning("📁 results/generated_predictions_extracted.json 파일이 존재하지 않습니다.")
