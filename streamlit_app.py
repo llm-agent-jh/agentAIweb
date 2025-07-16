@@ -158,7 +158,7 @@ elif page == "prompt_regenerated 비교":
     st.title("📝 Query1: Prompt (vanilla vs regenerated) 비교")
 
     # JSON 경로
-    prompt_json_path = Path("results/merged_query1.json")
+    prompt_json_path = Path("results/prompt_comparsion.json")
     if not prompt_json_path.exists():
         st.warning("📁 results/merged_query1.json 파일이 존재하지 않습니다.")
     else:
