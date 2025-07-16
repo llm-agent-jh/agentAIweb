@@ -148,3 +148,37 @@ elif page == "예측 결과 비교":
         st.info(example["label"])
     else:
         st.warning("📁 results/generated_predictions_extracted.json 파일이 존재하지 않습니다.")
+
+
+# ───────────────────────────────────────────────────────────
+# ✅ 4. Prompt Regenerated 비교
+# ───────────────────────────────────────────────────────────
+elif page == "prompt_regenerated 비교":
+    st.title("📝 Query1: Prompt (vanilla vs regenerated) 비교")
+
+    # JSON 경로
+    prompt_json_path = Path("results/merged_query1.json")
+    if not prompt_json_path.exists():
+        st.warning("📁 results/merged_query1.json 파일이 존재하지 않습니다.")
+    else:
+        with open(prompt_json_path, "r", encoding="utf-8") as f:
+            prompt_data = json.load(f)
+
+        # 모델 선택
+        st.sidebar.markdown("### 🧠 모델 선택")
+        model_names = sorted(prompt_data.keys())
+        selected_model = st.sidebar.selectbox("모델을 선택하세요", model_names)
+
+        # 해당 모델의 vanilla / regenerated 쿼리
+        vanilla_query = prompt_data[selected_model].get("vanilla", "(vanilla 쿼리 없음)")
+        regenerated_query = prompt_data[selected_model].get("regenerated", "(regenerated 쿼리 없음)")
+
+        st.markdown(f"### 📌 선택한 모델: `{selected_model}`")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("#### 🧾 Vanilla Prompt")
+            st.code(vanilla_query, language="markdown")
+        with col2:
+            st.markdown("#### ✨ Regenerated Prompt")
+            st.code(regenerated_query, language="markdown")
