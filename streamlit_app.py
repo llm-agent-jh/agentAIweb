@@ -183,3 +183,45 @@ elif page == "prompt_regenerated 비교":
         with col2:
             st.markdown("#### ✨ Regenerated Prompt")
             st.code(regenerated_query, language="markdown")
+
+# ✅ 5. 모델별 GT vs Prediction 보기
+elif page == "모델 예측 결과 비교":
+    st.title("📂 모델별 GT vs 예측 결과 비교")
+
+    base_path = Path("results/eval_v1")
+    if not base_path.exists():
+        st.warning("`results/eval_v1/` 경로가 존재하지 않습니다. GitHub에 업로드한 후 다시 시도해 주세요.")
+    else:
+        # 모델 폴더들 탐색
+        model_dirs = sorted([p for p in base_path.iterdir() if p.is_dir()])
+        model_names = [p.name for p in model_dirs]
+
+        selected_model = st.sidebar.selectbox("🔍 모델을 선택하세요", model_names)
+        model_path = base_path / selected_model
+
+        # 파일 경로 설정
+        gt_path = model_path / "eval" / "gpt4o.txt"
+        ours_pred_path = model_path / "eval_ours" / "qwen3.txt"
+        gpt4o_pred_path = model_path / "eval_ours" / "gpt4o.txt"
+
+        # 각 파일 읽기 함수
+        def read_file_safe(path):
+            if path.exists():
+                with open(path, "r", encoding="utf-8") as f:
+                    return f.read()
+            else:
+                return "(파일이 존재하지 않습니다)"
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown("### ✅ Ground Truth (gpt4o, eval)")
+            st.code(read_file_safe(gt_path), language="markdown")
+
+        with col2:
+            st.markdown("### 🤖 Our Prediction (qwen3, eval_ours)")
+            st.code(read_file_safe(ours_pred_path), language="markdown")
+
+        with col3:
+            st.markdown("### 🤖 GPT-4o Prediction (eval_ours)")
+            st.code(read_file_safe(gpt4o_pred_path), language="markdown")
