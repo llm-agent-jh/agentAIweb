@@ -1,0 +1,1843 @@
+Model Unique Name,Category,Query_eng,Query_korea,GT,qwen3 middle answer,,,,qwen3 Answer,,,,gpt4o middle answer,,,,gpt4o Answer 
+AnimateDiff-Lightning: Cross-Model Diffusion Distillation,Text-to-Video,"Can you animate a scene of a rabbit in a spacesuit running around on the moon?
+",토끼가 우주복을 입고 달 위에서 뛰어다니는 장면을 애니메이션으로 보여줄 수 있나요?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to create an animated sequence of a rabbit in a spacesuit running on the moon. This is a complex request that requires a model capable of generating or animating images based on a text description.
+
+**Sub-goals:**
+*   Text-to-image generation for the initial frame.
+*   Text-to-image generation for subsequent frames to animate the scene.
+*   Understanding of the physical context (spacesuit, moon) to ensure realistic animation.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The provided models are insufficient to create an animated scene from a single text prompt. Therefore, no model can fulfill the user's request. The workflow must adhere to the Hard Rule.
+
+### A. High-Level Overview
+The workflow attempts to use the most appropriate model from the provided list to generate a single image from a text prompt. However, since the user requires an animation, this model cannot fulfill the entire request.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: ""A rabbit in a spacesuit running around on the moon""]
+|
+v
+[ImgTxt2Img-HuggingFace-alaa-lab-InstructCV (Text-to-image generation)]
+|
+v
+[Final Output (A single image of the rabbit on the moon, confidence: low)]
+
+### C. Justify Your Design
+The **ImgTxt2Img-HuggingFace-alaa-lab-InstructCV** model is the only text-to-image model available. It is the closest to fulfilling the user's request by generating a single image based on a text description. However, it cannot create an animation. The user's goal is to generate a **scene of a rabbit running around on the moon**, which inherently requires multiple frames and animation logic. Since this workflow must use exactly one model and none of the provided models can chain or animate images, the request is non-achievable.
+
+**Conclusion:** The provided models are insufficient for this task. The response is: not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user intends to animate a scene featuring a rabbit in a spacesuit running around on the moon. The sub-goals involve creating an animated or moving sequence (video/animation).
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task requires creating an animation from a textual or visual description. However, given the provided models, none are capable of generating or animating video content. All available models focus on text, image captioning, or static image generation, none of which can satisfy the user's goal of creating an animation.
+
+### B. Visual Flow Diagram (text-based blocks)
+Since the task cannot be met with the capabilities of any single provided model, I must adhere to the rules indicated:
+
+not available
+
+### C. Justify Your Design
+No available model can generate animations or video content. The provided models include a voice-to-text converter, an image captioning model, and a text-to-image model, none of which suffice for animation creation. The analysis determined that no single model in the list could fulfill the user's request effectively, resulting in the decision of non-achievability.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+AnimateLCM: Computation-Efficient Personalized Style Video Generation without Personalized Video Data,Text-to-Video,"Can you generate a short video of a person walking in a cartoon style?
+",만화풍 스타일로 사람이 걷는 장면을 짧은 동영상으로 생성해 줄 수 있나요?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to generate a video depicting a person walking in a cartoon (anime) style.
+
+### Sub-goals:
+- Video generation
+- Cartoon/Anime style
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+This workflow is not achievable with the provided models.
+
+### A. High-Level Overview
+This task requires a model capable of generating a video from text, which none of the provided models can do. The available models are limited to image generation, classification, and pose estimation.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Text prompt ""a person walking in a cartoon style""]
+|
+v
+[Model: not available (required model not provided)]
+|
+v
+[Final Output: Short video of a person walking in a cartoon style (not possible)]
+
+### C. Justify Your Design
+The user's request is for a **video generation** task. The provided models are limited to static image generation, classification, and pose estimation. None of the models can generate a video from a text prompt.
+
+- **Classification-HuggingFace-NTQAI-pedestrian_gender_recognition**: Can only classify gender from an image. Cannot generate any visual content.
+- **PoseEstimation-OpenPose**: Can estimate human poses from an image. Cannot generate a video or apply style.
+- **Txt2Img-HuggingFace-prompthero-openjourney-v4**: Can generate a single image from a text prompt. Cannot generate a video sequence.
+
+Since the task explicitly requires a video and none of the models can fulfill this requirement, the correct response is:
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user wants to generate a short video of a person walking in a cartoon style. This involves creating motion graphics or animation, requiring synthesis of moving images.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+Given the available models, none are capable of creating a video. The closest option, ""Txt2Img-HuggingFace-prompthero-openjourney-v4,"" is a text-to-image model, which can only produce a single static cartoon-style image from a text description. It does not support video or animation generation.
+
+### B. Visual Flow Diagram (text-based blocks)
+No suitable single-model workflow available.
+
+### C. Justify Your Design
+Generating a short video requires capabilities to create and combine a sequence of images into motion, which is beyond the capacity of the provided text-to-image model, ""Txt2Img-HuggingFace-prompthero-openjourney-v4."" This model is unable to produce animations or videos. Consequently, none of the listed models can fulfill the user's request.
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+jina-embeddings-v3: Multilingual Embeddings With Task LoRA,Feature Extraction,"Can you generate an embedding that matches the Korean sentence I entered with the English sentence, so that it has the same meaning?
+",제가 입력한 한국어 문장을 영어와 비교해도 같은 의미로 매칭되도록 임베딩을 생성해 줄 수 있나요?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to create a semantic embedding that represents the meaning of a Korean sentence in a vector space that corresponds to the same meaning as an English sentence. This is a cross-lingual embedding task.
+
+Sub-goals:
+*   Generate a vector representation of a Korean sentence
+*   Generate a vector representation of an English sentence
+*   Ensure the two vectors have a high semantic similarity
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The workflow takes the Korean sentence as input, processes it through a pre-trained multilingual embedding model to generate a dense vector representation. This vector is then compared to the vector generated from the English sentence to determine semantic similarity.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Korean sentence]
+|
+v
+[Model: Embedding Model (purpose: Generate cross-lingual semantic embedding)]
+|
+v
+[Final Output: Cross-lingual embedding vector (goal + confidence: Medium)]
+
+### C. Justify Your Design
+No single model from the provided list can directly accomplish the user's goal of generating an embedding that matches the meaning of a Korean sentence to an English sentence. The user's request involves a cross-lingual semantic alignment, which requires a model that can understand and represent the meaning of text in multiple languages simultaneously.
+
+The provided models are:
+*   `Txt2Voice-HuggingFace-espnet-fastspeech2_conformer_with_hifigan` - Converts text to speech, not text to embedding.
+*   `Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large` - Converts images to text, not text to embedding.
+*   `Segmentation-DeepLabV3-ResNet50-VOC` - Performs image segmentation, entirely unrelated to text embedding.
+
+Since none of these models can generate embeddings from text, and there is no model for text-to-embedding in the list, the user's request cannot be fulfilled. Therefore, following the Hard Rule, the response is:
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"# 1. Core Task
+The user's intent is to generate an embedding that represents the semantic similarity between a Korean sentence and an English sentence. The sub-goal is to create embeddings that capture the meaning in a comparable way across different languages.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+Unfortunately, none of the provided models have the capability to generate text embeddings or perform multilingual semantic matching between Korean and English sentences. The models on the list serve other specific purposes like speech synthesis, image captioning, and image segmentation, which do not align with the task of semantic text embedding and cross-lingual matching.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+not available
+```
+
+### C. Justify Your Design
+The task requires a model capable of cross-lingual semantic embedding, such as a multilingual transformer model like BERT or similar models specifically designed for natural language processing across languages. However, none of the recommended models are capable of this type of textual analysis or embedding generation. The models listed are primarily focused on image processing and speech synthesis, which are unsuitable for the task at hand. Therefore, the solution is not achievable with the given model list.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+JINA CLIP: Your CLIP Model Is Also Your Text Retriever,Feature Extraction,"Can you find the image most similar to the sentence 'a scene of a puppy running around'?
+",‘강아지가 뛰어노는 장면’이라는 문장과 가장 유사한 이미지를 검색할 수 있나요?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to find an image that visually represents the concept described in the sentence ""a scene of a puppy running around."" The primary goal is to identify the most similar image from a database based on the textual description.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+Design a high-level CNAPS workflow that uses exactly one model to fulfill the task.
+
+### A. High-Level Overview
+The input text description, ""a scene of a puppy running around,"" is fed directly into a text-to-image model. This model generates an image from the textual prompt, which serves as the reference for similarity. The user's goal is not to search for an existing image but to create one. The final output is a generated image that visually corresponds to the provided text description.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: ""a scene of a puppy running around""]
+|
+v
+[Txt2Img-HuggingFace-prompthero-openjourney-v4 (Generate an image from the text prompt)]
+|
+v
+[Final Output (Generated image of a puppy running, confidence: High)]
+
+### C. Justify Your Design
+The **Txt2Img-HuggingFace-prompthero-openjourney-v4** model is the only one provided that can accomplish the user's request. The task is fundamentally a text-to-image generation task, not an image retrieval or search task. This model is designed to take a textual description and produce a corresponding visual image, which directly fulfills the user's goal.
+
+The other models listed (Txt2Img-StableDiffusionV1-ICBINP and Txt2Img-StableDiffusionV1-RunDiffusionFX) are also text-to-image models, but the user's request is to find an image similar to the description, not to generate a new one. Therefore, the **Txt2Img-HuggingFace-prompthero-openjourney-v4** model is the most appropriate single-model solution, as it is the only one that can create an image from text.
+
+Cite the model’s paper or GitHub/ArXiv reference.
+*   **Model:** Txt2Img-HuggingFace-prompthero-openjourney-v4
+*   **Reference:** Paper: None (This is a Hugging Face model, and no specific research paper is provided for this variant.)",,,,"이런 경우에는 Stable Diffusion 모델을 추천할게. 이 모델은 텍스트로 주어진 설명을 바탕으로 이미지를 생성하는 기능이 강력해. 사용자가 ""a scene of a puppy running around""라는 문장을 입력하면, 모델은 그 문장의 의미를 파악해보고, 그에 맞는 이미지를 실제로 만들어내는 거야. 그래서 너는 이미지 데이터베이스를 검색하는 대신, 직접 원하는 이미지를 만들어내는 데 도움을 줄 수 있을 거야.",,,,"## 1. Core Task
+The user's intent is to find an image that is most similar to the description of ""a scene of a puppy running around."" The sub-goal is to match the text description with a corresponding visual image representation.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task involves generating an image that visually represents the given text description, ""a scene of a puppy running around."" Although the user wants to find an existing image, given the models available, a text-to-image model can create a fresh image based on the description. The approach will use a text-to-image generation model to produce an image that aligns with the text prompt. Since this is the closest achievable action with the provided models, the output will be a newly generated image.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: ""a scene of a puppy running around""]
+|
+v
+[Txt2Img-HuggingFace-prompthero-openjourney-v4 (text-to-image generation)]
+|
+v
+[Final Output: Generated Image based on the sentence ""a scene of a puppy running around"" + confidence]
+```
+
+### C. Justify Your Design
+The task of finding the most similar pre-existing image to a given textual description typically requires a model with capabilities to match visuals to text. However, since the models provided are all text-to-image generation models and lack retrieval functionality, none directly fulfill the task of finding a similar image. The closest alternative achievable with the given models is to generate an image from the text description. I selected the **Txt2Img-HuggingFace-prompthero-openjourney-v4** model for this purpose because it is designed to generate images from textual prompts, which aligns with producing a representation of the described scene. No other models were used as they fall into the same category, and this selection most succinctly accomplishes the creation aspect of the user's request.",,,,"이런 경우에는 Txt2Img-HuggingFace-prompthero-openjourney-v4 모델을 추천할게. 이 모델은 사용자가 입력한 문장을 바탕으로 그에 맞는 장면을 바로 그려주는 텍스트-투-이미지 생성에 특화되어 있어, “강아지가 뛰어다니는 장면”처럼 구체적인 묘사를 넣으면 그 느낌과 구도를 살린 이미지를 새로 만들어줄 수 있어. 그래서 현재 제공된 기능만으로는 기존 이미지를 찾아 매칭하기보다, 네가 원하는 묘사를 가장 가깝게 시각화한 결과를 빠르게 얻는 데 이 모델이 가장 적합해."
+"M3-Embedding: Multi-Linguality, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation",Sentence Similarity,"If I add reviews in multiple languages, can you group them by common topic?
+",여러 언어 리뷰를 넣으면 공통된 주제끼리 묶어줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to automatically categorize or ""group"" reviews written in different languages into topics. This is a natural language processing (NLP) task focused on topic modeling or clustering.
+
+Sub-goals:
+*   Topic extraction from multi-lingual text
+*   Clustering or classification of reviews by thematic similarity
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+## A. High-Level Overview
+The input will be a collection of multi-lingual review texts. The selected model will process these texts to identify the underlying topics or themes. It will then group the reviews based on their shared thematic content, producing a structured output that maps each review to its primary topic.
+
+## B. Visual Flow Diagram (text-based blocks)
+[Input: Multi-lingual review texts]
+|
+v
+[Model: **Not available** (No suitable model found)]
+|
+v
+[Final Output (Topic-grouped reviews + not available confidence)]
+
+## C. Justify Your Design
+No provided model is suitable for the user's request. The task requires a topic modeling or clustering capability, which is not a function of any of the available models.
+
+*   **Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large**: This is an image-to-text model, incapable of processing text.
+*   **Segmentation-DeepLabV3Plus-MobileNet-VOC**: This is an image segmentation model, irrelevant to text analysis.
+*   **Txt2Voice-HuggingFace-suno-bark**: This is a text-to-speech model, which generates audio from text but does not analyze or categorize text.
+
+Since the user's goal is text-based topic analysis and none of the provided models can perform this function, the correct response is:
+
+**not available**",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to analyze reviews provided in multiple languages and group them by common topics. The sub-goal involves understanding and categorizing textual content.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's task requires understanding multilingual text and clustering them based on shared topics. However, none of the provided models are text analysis models capable of performing topic grouping on multilingual reviews. The available models are for image captioning, semantic segmentation (for images), and text-to-voice conversion. None of these can handle the user's core task of topic grouping for text reviews.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Multilingual reviews text]
+|
+v
+[Ineffective]
+|
+v
+[Final Output: not available]
+```
+
+### C. Justify Your Design
+There is no suitable model among the provided options that can accomplish the task of grouping reviews by common topics. The models listed focus on image captioning, image segmentation, and text-to-voice conversion, none of which address text analysis or topic modeling. Therefore, based on the Hard Rule, I must conclude: 
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer,Image-to-Image,"Can you put a hat on the puppy picture?
+",강아지 사진에 모자를 씌워줄 수 있니?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to perform a photo editing task to add a hat to a given puppy image. The primary goal is to modify an existing image by adding a new object.
+
+Sub-goals:
+*   Image object manipulation (adding a hat)
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The input puppy picture is processed by the `ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix` model. This model uses a text prompt (""a puppy wearing a hat"") to guide the image generation process. The model generates a new image where the puppy is depicted wearing a hat, based on the input image's original composition and context.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Puppy picture]
+|
+v
+[Model: ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix (Image-to-Image with text prompt)]
+|
+v
+[Final Output: Puppy picture with a hat (High Confidence)]
+```
+
+### C. Justify Your Design
+The `ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix` model is the only suitable choice from the provided list. This model is specifically designed for image-to-image translation with text prompts, making it perfect for the user's request to ""put a hat on the puppy picture.""
+
+The user's task requires adding a new object (a hat) to an existing image (the puppy). The model's capability to take an input image and generate a new image with the specified text prompt directly addresses this need. The model's instruction-following nature allows it to understand and execute the user's request.
+
+The other models are not appropriate:
+*   `Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large` is a text generation model and cannot perform image editing.
+*   `WeatherRemoval-CLAIO-DeHaze` is a single-image restoration model focused on removing haze and does not have the capability to add new objects.
+
+Therefore, this single model is sufficient to achieve the user's goal.",,,,"이런 경우에는 `ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix` 모델을 추천할게. 이 모델은 텍스트 프롬프트를 기반으로 이미지를 생성하거나 수정할 수 있는 기능이 있어. 이 모델은 사용자가 입력한 ""puppy wearing a hat""라는 텍스트를 바탕으로, 이미지의 원본 콘텍스트를 유지하면서 풋볼을 추가하는 작업을 자연스럽게 해줄 거야. 따라서, 편안하게 웃고 있는 개의 사진에 풋볼을 자연스럽게 추가하는 작업에 정말 도움이 될 거다.",,,,"## 1. Core Task
+The user's intent is to modify an image of a puppy by adding a hat to the picture. The main sub-goal would be image manipulation or editing to overlay a hat onto the puppy's image.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's task is to add a hat to an existing image of a puppy. The model ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix is suitable for this task because it is designed to make textual instructions-based edits directly to an image. By specifying the instruction ""add a hat to the puppy,"" the model can process the input image and generate an edited version with a hat added to the puppy.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Image of a puppy]
+|
+v
+[ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix (image editing based on text instructions)]
+|
+v
+[Final Output: Image of a puppy with a hat (high confidence that the model will place a hat on the puppy)]
+```
+
+### C. Justify Your Design
+The ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix model is the most appropriate choice because it is explicitly designed for performing modifications and edits to images based on textual instructions, as described in its paper (https://arxiv.org/pdf/2211.09800). The single-model approach leverages its ability to interpret and execute transformation commands such as adding objects to images, making it uniquely capable of fulfilling the user's request to add a hat to a puppy image. No other models are used because they either do not support the required task of image manipulation or serve unrelated purposes like image captioning or weather removal.",,,,"이런 경우에는 ImgTxt2Img-HuggingFace-timbrooks-instruct-pix2pix 모델을 추천할게. 이 모델은 이미지를 불러온 다음 “강아지에게 모자를 씌워줘” 같은 간단한 문장을 입력하면, 그 지시에 맞춰 이미지를 자연스럽게 수정해주는 기능이 있어. 그래서 네가 가진 강아지 사진에 바로 모자를 얹은 새로운 이미지를 만들 수 있어서 원하는 편집 작업을 깔끔하게 해결하는 데 도움이 될 거야."
+Wan: Open and Advanced Large-Scale Video Generative Models,Image-to-Video,"Can you make a video of a bird flying over the sea in a realistic style?
+",실사풍으로 바다 위를 나는 새 영상 만들어 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a realistic image of a bird flying over the sea.
+
+### 2. CNAPS-style Workflow (Single-Model)
+This task requires a text-to-image generation model. The provided list includes one such model.
+
+### A. High-Level Overview
+The user's input text prompt (""a bird flying over the sea in a realistic style"") is fed directly into the `Txt2Img-StableDiffusionV1-Realisian` model. This model processes the text to generate a single, high-quality, realistic image that visually represents the described scene.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: ""a bird flying over the sea in a realistic style""]
+|
+v
+[Txt2Img-StableDiffusionV1-Realisian (text-to-image generation)]
+|
+v
+[Final Output (a realistic image of a bird flying over the sea + confidence: High)]
+
+### C. Justify Your Design
+The `Txt2Img-StableDiffusionV1-Realisian` model is the only appropriate choice from the provided list. The user's goal is to create a single image from a textual description, which is precisely the function of a text-to-image generative model. The other models are unsuitable for this task:
+- **HDR-DeepHDRR** is a high dynamic range image processing model, designed to enhance existing images, not create new ones.
+- **Deblur-MSSNet-L-GoPro** is a deblurring model, which would remove blur from an image rather than generating a new one.
+
+Therefore, this single model is sufficient to fulfill the user's request. The workflow is simple and adheres to the CNAPS principle of a single, pre-defined model execution.
+
+**Citation:**
+- **Txt2Img-StableDiffusionV1-Realisian** (No specific paper provided, but based on the Stable Diffusion architecture)",,,,"이런 경우에는 `Txt2Img-StableDiffusionV1-Realisian` 모델을 추천할게. 이 모델은 텍스트를 입력으로 받아서, 그 텍스트에 맞는 사실적인 이미지를 생성하는 데 강력한 능력을 가지고 있어. 사용자 요청에선 ""바다 위를 날아가는 새""라는 상황을 그릴 수 있는데, 이 모델은 그런 상황을 사실적으로 재현할 수 있는, 고화질의 이미지를 만들어내게 해. 바다가 넓고 새가 날아가는 그 순간을 자연스럽게 표현하는 데 큰 도움이 될 거야.",,,,"## 1. Core Task
+The user's intent is to create a video of a bird flying over the sea in a realistic style. This involves sub-goals such as animation and realism, which require video synthesis capabilities.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task of creating a video of a bird flying over the sea in a realistic style requires a model capable of generating moving images. However, since no video synthesis models are provided and only models for image enhancement, deblurring, and text-to-image generation for still images are available, none can fulfill the task of video creation.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: request for video of a bird flying over the sea in realistic style]
+|
+v
+not available
+```
+
+### C. Justify Your Design
+There are no models in the provided list that can generate videos. The listed models include HDR-DeepHDRR for HDR image reconstruction, Deblur-MSSNet-L-GoPro for image deblurring, and Txt2Img-StableDiffusionV1-Realisian for converting text to a single image. None of these are capable of synthesizing a video. Therefore, the capability to create a realistic video as requested is not available using the provided models.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+SV4D 2.0: Enhancing Spatio-Temporal Consistency in Multi-View Video Diffusion for High-Quality 4D Generation,Image-to-Video,"Can you create a video where we can see people dancing from different angles simultaneously? Can you create a video where virtual characters talk simultaneously?
+",사람이 춤추는 모습을 다양한 각도에서 동시에 볼 수 있는 영상 생성해 줄래?가상 캐릭터들이 동시에 대화하는 영상을 만들어 줄 수 있니?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to create a video with multiple simultaneous actions: people dancing from different angles and virtual characters talking simultaneously. This requires video generation and synthesis.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+This task is non-achievable with the provided models. No single model can create video content with multiple simultaneous actions. Therefore, the most appropriate response is:
+
+### A. High-Level Overview
+No model can fulfill the user's request.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: User request for a video with simultaneous dancing and talking]
+|
+v
+[not available (no suitable model)]
+|
+v
+[Final Output (not available)]
+
+### C. Justify Your Design
+The user's request requires a video generation model capable of multi-modal synthesis (people and speech) and multi-view rendering (different angles). None of the provided models can perform this complex task. `Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large` is for image captioning, `Txt2Voice-HuggingFace-espnet-fastspeech2_conformer_with_hifigan` is for text-to-speech, and `Voice2Txt-nvidia-parakeet-tdt-1.1b` is for speech recognition. None of these can generate video content. Therefore, no single model from the list can accomplish the goal.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to create videos showcasing people dancing from different angles simultaneously and virtual characters talking simultaneously. The task involves video creation and animation.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's request involves creating videos, specifically animations, which are not achievable with the provided models. Those models are limited to image captioning and text-to-voice or voice-to-text conversions, none of which can generate video content.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+[Input: video request]
+|
+v
+[Not available]
+|
+v
+[Final Output (not achievable with provided models)]
+
+### C. Justify Your Design
+None of the provided models are capable of creating or processing video animations as requested by the user. The models available are:
+- Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large: This model provides image captioning, which is irrelevant for video creation.
+- Txt2Voice-HuggingFace-espnet-fastspeech2_conformer_with_hifigan: This model converts text to speech, insufficient for generating video content.
+- Voice2Txt-nvidia-parakeet-tdt-1.1b: This model is for voice-to-text transcription, not suitable for video or animation.
+
+Given these limitations, I must respond based on the hard rule: 
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+HunyuanVideo-Avatar: High-Fidelity Audio-Driven Human Animation for Multiple Characters,Image-to-Video,"Can you make a video where virtual characters talk simultaneously?
+",가상 캐릭터들이 동시에 대화하는 영상을 만들어 줄 수 있니?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a video featuring characters speaking at the same time. The core task is video synthesis with simultaneous audio.
+
+# 2. CNAPS-style Workflow (Single-Model)
+The provided models are insufficient to create a video with simultaneous speech. The only model capable of generating audio from text is `Txt2Voice-HuggingFace-espnet-fastspeech2_conformer_with_hifigan`, but it cannot generate visual characters or create a video. Therefore, this task is non-achievable with the given models.
+
+### A. High-Level Overview
+This request cannot be fulfilled using the provided models.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: User's request for a video with simultaneous speech]
+|
+v
+[not available (insufficient models)]
+|
+v
+[Final Output (goal + confidence)]
+not available
+(confidence: 100% - The user's goal requires both text-to-speech and video synthesis, which is impossible with the provided single-model constraints)
+
+### C. Justify Your Design
+This request is non-achievable with the provided models. The user's goal is to create a video, which inherently requires both visual and audio components. The only model provided (`Txt2Voice-HuggingFace-espnet-fastspeech2_conformer_with_hifigan`) can only generate speech from text. It lacks the capability to create visual characters or a video sequence. As a result, no single model can fulfill the user's request. Therefore, the correct response is `not available`.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to create a video where virtual characters talk simultaneously. The sub-goals include generating virtual characters, synchronizing speech, and producing a video format output.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+None of the provided models can directly create a video with virtual characters talking simultaneously. All available models focus on different tasks unrelated to video creation or synchronization of speech with virtual characters.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Request to make a video with talking virtual characters]
+|
+v
+[not available]
+
+### C. Justify Your Design
+None of the provided models are capable of fulfilling the user's request, as the task requires video generation and audio-visual synchronization, which is beyond the capabilities of the listed models. The available models are focused on speech-to-text, text-to-speech, and image captioning tasks, none of which involve creating or animating virtual characters or generating video content. As per instruction, the response is ""not available"" because none of the models can achieve the user's goal.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Structured 3D Latents for Scalable and Versatile 3D Generation∗,Text-to-3D,"Can you create a 3D object based on the phrase ‘future car’?
+",‘미래형 자동차’라는 문장을 기반으로 3D 오브젝트를 생성해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a 3D model from a textual description. The goal is to create a 3D object that represents a ""future car.""
+
+# 2. CNAPS-style Workflow (Single-Model)
+This task cannot be fulfilled by any of the provided models. The user's request requires 3D modeling capabilities, which are not available in the list of 2D Super-Resolution (SISR) models.
+
+### A. High-Level Overview
+The provided models are all Single Image Super-Resolution (SISR) models designed to enhance the resolution of 2D images. They cannot process or generate 3D data. Therefore, this workflow is not possible.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Textual description of ""future car""]
+|
+v
+[No Model Available]
+|
+v
+[Final Output (Goal Unfulfilled + Confidence: 0%)]
+This workflow is not achievable with the provided models.
+
+### C. Justify Your Design
+The user's request to ""create a 3D object"" is fundamentally different from the function of the provided models. The models listed are all for 2D image super-resolution tasks. They take a low-resolution 2D image as input and produce a high-resolution 2D image as output. They do not process text, let alone generate 3D geometry. Therefore, none of the provided models can fulfill the user's request. The Hard Rule is applied, and the answer is: not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to create a 3D object of a ""future car"" based on a textual description. The task specifically involves generating a three-dimensional digital representation from a textual input.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+None of the provided models are capable of creating a 3D object from a textual description. The models listed are all Super-Resolution Image models designed to enhance the resolution of existing images, not to generate 3D objects or interpret textual descriptions to create visuals. Therefore, this request cannot be fulfilled by any of the available models.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Textual Description ('future car')]
+|
+v
+not available
+```
+
+### C. Justify Your Design
+The task requires transforming a textual description into a 3D object, for which none of the listed Super-Resolution Image models (SISR-SwinIR-Classical-DIV2K-48-M-3x, SISR-CARN-M-3x, SISR-RCAN-3x) are suitable. These models are designed for enhancing image resolution only. There is no model available in the provided options that can interpret text and create a 3D object, hence, the required task is not feasible given the constraints.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+TripoSR: Fast 3D Object Reconstruction from a Single Image,Image-to-3D,"Can you turn my puppy photo into a 3D shape?
+",강아지 사진을 입체적인 3D 형태로 바꿔줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to convert a 2D image of a puppy into a 3D object. This is a 2D-to-3D conversion task.
+
+# 2. CNAPS-style Workflow (Single-Model)
+The provided models do not include any capable of 2D-to-3D conversion. Therefore, no model can fulfill this request.
+
+**Answer:** not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to convert a photograph of a puppy into a 3D shape. The task requires transforming a 2D image into a 3D model, which involves depth perception, shape modeling, and rendering.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+Unfortunately, none of the provided models are capable of converting a 2D image into a 3D shape. The available models focus on image-text conversion, image super-resolution, and text-to-image generation, none of which are suitable for this 2D to 3D transformation task.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Photo of a puppy]
+|
+v
+[not available]
+|
+v
+[Final Output: not available]
+```
+
+### C. Justify Your Design
+None of the models provided support the transformation of a 2D image into a 3D shape. The models available include:
+- Txt2Img-StableDiffusionV1-ICBINP, which is used for generating images from text prompts.
+- ImgTxt2Img-HuggingFace-alaa-lab-InstructCV, which is used for converting images based on textual instructions.
+- SISR-SwinIR-Real-DFO-64-M-2x, which is focused on super-resolution tasks, enhancing image details.
+
+As none of these models have the capability to generate 3D shapes from 2D images, this specific task is not achievable with the provided models. Thus, my response is: 
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Hunyuan3D 2.0: Scaling Diffusion Models for High Resolution Textured 3D Assets Generation,Image-to-3D,"Can you create detailed 3D assets that are ready to be used in your game?
+",게임에서 바로 쓸 수 있는 수준의 디테일한 3D 에셋을 만들어 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to create detailed 3D assets for a game. The primary goal is to generate high-quality 3D models that are ready for use in a game environment.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+Design a high-level CNAPS workflow that uses exactly one model to fulfill the user's task.
+
+### A. High-Level Overview
+The user will provide a detailed text description of the desired 3D asset (e.g., ""a futuristic spaceship with glowing energy emitters""). This text will be fed into the **Txt2Img-HuggingFace-prompthero-openjourney-v4** model. The model will interpret the text prompt and generate a high-resolution, photorealistic 2D image of the 3D asset. This image can then be used as a reference or directly imported into a 3D modeling software for further refinement and use in the game.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Detailed text description of the 3D asset (e.g., ""a futuristic spaceship with glowing energy emitters"")]
+|
+v
+[Txt2Img-HuggingFace-prompthero-openjourney-v4 (Generates a high-resolution 2D image from a text prompt)]
+|
+v
+[Final Output: High-resolution 2D image of the 3D asset (Confidence: Moderate, as the image is not a true 3D model)]
+
+### C. Justify Your Design
+The **Txt2Img-HuggingFace-prompthero-openjourney-v4** model is the most appropriate single model for this task because it is a text-to-image generator. The user's request to ""create detailed 3D assets"" is fundamentally an image generation task. This model is specifically designed to interpret text prompts and produce high-quality, detailed 2D images, which can serve as a starting point for 3D asset creation.
+
+- **Sufficiency**: While the model does not generate a true 3D model, it provides a detailed 2D image that is the closest available output from the provided models. This image can be used as a reference or imported into a 3D modeling pipeline.
+- **Exclusion of Other Models**:
+  - **Inpainting-LatentDiffusion**: This model is for image editing (filling in missing parts of an image) and cannot generate new content.
+  - **Txt2Img-StableDiffusionV1-DreamShaper**: While also a text-to-image model, the OpenJourney model was selected because it is more specialized for ""game art"" and ""fantasy"" styles, which are often more aligned with game asset creation than the DreamShaper model, which is more general-purpose.
+
+**Reference**: The model is from the Hugging Face platform, which is a well-known repository for text-to-image models. Its capabilities align directly with the user's request for ""3D assets"" by generating the visual components.",,,,"이런 경우에는 **Txt2Img-HuggingFace-prompthero-openjourney-v4** 모델을 추천할게. 이 모델은 사용자가 원하는 3D 아트워크를 텍스트로 설명하면, 그 설명에 맞는 고화질 2D 이미지를 만들어내는 데 특화되어 있어. 예를 들어, ""파이어볼을 쏘는 고대 마법사""라는 설명을 넣으면, 그런 마법사의 이미지를 현실적으로 그려낼 수 있어. 사용자는 이 이미지를 게임에 사용할 3D 모델의 기초 자료로 활용할 수 있구나.",,,,"## 1. Core Task
+The user's intent is to generate detailed 3D assets that can be directly utilized in a game environment. This task involves creating complex 3D models which are typically suited for real-time rendering or game engines.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's request involves creating detailed 3D assets, which typically requires 3D modeling capability. None of the provided models specialize in or are adequate for generating 3D assets. The available models focus on image processing and generation, such as image inpainting or text-to-image conversion for 2D images. Therefore, there is no model among the provided ones that can produce 3D assets ready for game use.
+
+### B. Visual Flow Diagram (text-based blocks)
+Since this request cannot be fulfilled by any single model provided, the workflow does not proceed beyond the input stage:
+
+[Input: Request for 3D game assets]
+|
+v
+not available
+
+### C. Justify Your Design
+None of the recommended AI models, such as Inpainting-LatentDiffusion, Txt2Img-StableDiffusionV1-DreamShaper, or Txt2Img-HuggingFace-prompthero-openjourney-v4, are capable of creating detailed 3D assets directly suitable for use in games. These models focus on image manipulation and generation, not on 3D asset creation. Detailed 3D asset generation typically requires 3D modeling software or models capable of producing 3D geometry, which is beyond the scope of the provided models.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+VGGT: Visual Geometry Grounded Transformer,Image-to-3D,"Can you convert landscape photos into 3D terrain?
+",풍경 사진을 입체적인 3D 지형으로 변환해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to transform a 2D landscape photo into a 3D terrain model. The goal is to extract depth information from a 2D image and generate a 3D representation of the landscape.
+
+# 2. CNAPS-style Workflow (Single-Model)
+## A. High-Level Overview
+The workflow takes a single 2D landscape photo as input and processes it using a specialized 3D reconstruction model. The model analyzes the image to infer depth information, generating a 3D point cloud or mesh that represents the terrain. The final output is a 3D terrain model, ready for use in 3D applications or rendering.
+
+## B. Visual Flow Diagram (text-based blocks)
+[Input: 2D Landscape Photo]
+|
+v
+[Model: HDR-DeepHDRR (3D Reconstruction from 2D Image)]
+|
+v
+[Final Output: 3D Terrain Model (High Confidence)]
+
+## C. Justify Your Design
+The **HDR-DeepHDRR** model is the only one provided that can directly accomplish the user's goal. Its paper describes a method for ""High Dynamic Range (HDR) reconstruction from a single image,"" which inherently involves inferring depth information from a 2D image to create a 3D representation. This process is fundamentally the same as converting a 2D landscape photo into a 3D terrain.
+
+The other models are unsuitable:
+- **Txt2Img-StableDiffusionV1-ICBINP** is for text-to-image generation and cannot process existing images.
+- **Inpainting-CTSDG-Places2** is for image inpainting and cannot create 3D terrain from 2D input.
+
+Therefore, HDR-DeepHDRR is the single most appropriate model to fulfill the user's request.",,,,"이런 경우에는 HDR-DeepHDRR 모델을 추천할게. 이 모델은 2D 사진에서 깊이 정보를 추출해 3D 모델로 변환하는 작업에 특화되어 있어. 너가 원하는 2D 풍경 사진을 입력하면, 이 모델이 사진의 지형과 물체의 깊이를 분석해 3D 풍경 모델을 생성해준다. 이는 3D 그래픽이나 게임, 가상 현실 등에 사용할 수 있는 풍부한 3D 데이터를 만들어줄 거야.",,,,"## 1. Core Task
+The user's intent is to convert landscape photos into 3D terrain representations. The task requires a resolution where 2D images are transformed into 3D models or representations.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+None of the provided models are designed to convert 2D photos into 3D terrain. The models available focus on text-to-image generation, HDR imaging, and image inpainting. Therefore, there is no model capable of fulfilling the user's request of converting images into 3D terrain.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Landscape photos]
+|
+v
+not available
+|
+v
+[Final Output: not available]
+```
+
+### C. Justify Your Design
+None of the available models are appropriate for the task of converting 2D images into 3D terrain. Txt2Img-StableDiffusionV1-ICBINP is for text-to-image conversion, HDR-DeepHDRR deals with high dynamic range rendering, and Inpainting-CTSDG-Places2 is used for image inpainting. These models do not have 3D generation or modeling capabilities. Hence, the task is not achievable with the available models.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+BGE: One-Stop Retrieval Toolkit For Search and RAG,Text Classification,"Could you please help me find just the parts of the documents I've uploaded that are relevant to this question?
+",내가 올린 문서들 중에서 이 질문과 관련된 부분만 찾아줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to extract and retrieve specific, relevant sections of uploaded documents based on a given question. This is a document search and retrieval task, not a generation or modification task.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's input documents are fed directly into the `Txt2Txt-HuggingFace-facebook-bart-large-cnn` model. This model is a pre-trained text-to-text transformer that can be fine-tuned for information retrieval tasks. It processes the documents and the user's question to identify and extract the most relevant sentences or paragraphs. The final output is a list of these relevant excerpts from the documents.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: User's uploaded documents and question]
+|
+v
+[Txt2Txt-HuggingFace-facebook-bart-large-cnn (Text-to-Text for Information Retrieval)]
+|
+v
+[Final Output (Relevant document excerpts + High confidence)]
+
+### C. Justify Your Design
+The `Txt2Txt-HuggingFace-facebook-bart-large-cnn` model is the only appropriate choice because it is a text-to-text model capable of understanding and comparing documents with a question. The BART model is designed for summarization and text generation, but it can be fine-tuned for tasks like document search and question answering. It directly processes the input text (documents and question) to produce the desired output (relevant text). No other models are necessary as this single model fulfills the entire user request.
+
+This selection is based on the model's architecture and training capabilities as described in its paper:
+- **Reference:** Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., ... & Liu, P. J. (2019). ""Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer."" (https://arxiv.org/pdf/1910.13461)",,,,"이런 경우에는 `Txt2Txt-HuggingFace-facebook-bart-large-cnn` 모델을 추천할게. 이 모델은 문서와 질문을 처리해서 가장 관련성이 높은 부분을 찾아내는 기능이 있어. 사용자가 업로드한 문서에서 정확하고 필요한 정보를 빠르게 찾고 싶을 때, 이 모델이 최적의 도구로 적합해.",,,,"# 1. Core Task
+The user wants to find an image that visually represents the concept described in the sentence ""a scene of a puppy running around."" The primary goal is to identify the most similar image from a database based on the textual description.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+Design a high-level CNAPS workflow that uses exactly one model to fulfill the task.
+
+### A. High-Level Overview
+The input text description, ""a scene of a puppy running around,"" is fed directly into a text-to-image model. This model generates an image from the textual prompt, which serves as the reference for similarity. The user's goal is not to search for an existing image but to create one. The final output is a generated image that visually corresponds to the provided text description.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: ""a scene of a puppy running around""]
+|
+v
+[Txt2Img-HuggingFace-prompthero-openjourney-v4 (Generate an image from the text prompt)]
+|
+v
+[Final Output (Generated image of a puppy running, confidence: High)]
+
+### C. Justify Your Design
+The **Txt2Img-HuggingFace-prompthero-openjourney-v4** model is the only one provided that can accomplish the user's request. The task is fundamentally a text-to-image generation task, not an image retrieval or search task. This model is designed to take a textual description and produce a corresponding visual image, which directly fulfills the user's goal.
+
+The other models listed (Txt2Img-StableDiffusionV1-ICBINP and Txt2Img-StableDiffusionV1-RunDiffusionFX) are also text-to-image models, but the user's request is to find an image similar to the description, not to generate a new one. Therefore, the **Txt2Img-HuggingFace-prompthero-openjourney-v4** model is the most appropriate single-model solution, as it is the only one that can create an image from text.
+
+Cite the model’s paper or GitHub/ArXiv reference.
+*   **Model:** Txt2Img-HuggingFace-prompthero-openjourney-v4
+*   **Reference:** Paper: None (This is a Hugging Face model, and no specific research paper is provided for this variant.)",,,,"이런 경우에는 Txt2Img-HuggingFace-prompthero-openjourney-v4 모델을 추천할게. 이 모델은 사용자가 적어준 문장을 바탕으로 그 장면을 새로 그려주는 텍스트-투-이미지 생성에 특화되어 있어, “강아지가 뛰어다니는 장면”처럼 구체적인 묘사를 넣으면 역동감과 분위기를 살린 이미지를 바로 만들어줄 수 있어. 그래서 지금처럼 텍스트 설명을 시각적으로 표현하고 싶은 상황에서, 데이터베이스에서 유사 이미지를 찾기보다는 네가 떠올린 장면을 가장 가깝게 재현한 결과를 얻는 데 이 모델이 딱 맞아."
+GLiNER: Generalist and Lightweight Model for Named Entity Recognition,Token Classification,"Could you extract the names of places and institutions from this news article?
+",이 뉴스 기사에서 장소와 기관명을 추출해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to extract named entities (places and institutions) from a given news article. This is a named entity recognition (NER) task.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+This task requires a model that can process text and identify specific entities. The provided models are for text-to-text generation and computer vision tasks, which are insufficient for this purpose.
+
+**Answer:** not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to extract the names of places and institutions from a news article. The sub-goal is entity recognition within text.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The selected model, **Txt2Txt-HuggingFace-facebook-bart-large-cnn**, is adept at processing and generating text-based outputs. For the user's task, the model can be configured to summarize the news article by focusing on extracting named entities like places and institutions. The model receives the text input (news article) and outputs a list of identified names of places and institutions.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: News article text]
+|
+v
+[Txt2Txt-HuggingFace-facebook-bart-large-cnn (named entity recognition)]
+|
+v
+[Final Output: Extracted names of places and institutions + confidence levels]
+```
+
+### C. Justify Your Design
+The **Txt2Txt-HuggingFace-facebook-bart-large-cnn** model is sufficient for this task as it is designed for text transformation and summarization tasks that can be adapted for named entity recognition through finetuning or focused summarization. Despite being primarily a summarization model, its ability to process complex sentences and extract key elements makes it suitable for identifying named entities like places and institutions. Other models such as Segmentation-DeepLabV3Plus-MobileNet-VOC and Inpainting-MISF-Places2 are unrelated to text processing, hence not applicable for this text-based task.
+
+Cited Model Reference: https://arxiv.org/pdf/1910.13461",,,,"이런 경우에는 Txt2Txt-HuggingFace-facebook-bart-large-cnn 모델을 추천할게. 이 모델은 뉴스 기사처럼 긴 문장을 요약하거나 중요한 정보를 뽑아내는 데 특화되어 있어서, 기사 안에 등장하는 장소나 기관 이름 같은 고유명사를 추려주는 데 유용해. 그래서 너처럼 문서 속에서 장소와 기관을 자동으로 찾아내고 싶을 때, 이 모델을 활용하면 빠르고 정확하게 필요한 정보만 추출할 수 있을 거야."
+Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models,Feature Extraction,"Could you embed this sentence and group similar sentences together?
+",이 문장을 임베딩해서 비슷한 문장들끼리 묶어줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to process a collection of sentences to identify and group together those that are semantically similar. This is a fundamental text processing task known as sentence clustering or sentence similarity analysis.
+
+Sub-goals:
+*   Perform semantic embedding of input sentences
+*   Measure similarity between sentence embeddings
+*   Group sentences based on similarity thresholds
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+Design a high-level CNAPS workflow that uses exactly one model to fulfill the user's task.
+
+### A. High-Level Overview
+The workflow takes the user's sentence as input. The `Txt2Txt-HuggingFace-facebook-bart-large-cnn` model is used to perform a semantic embedding of the sentence, converting it into a dense vector representation that captures its meaning. This vector is then compared to embeddings of other sentences in the dataset to determine similarity. The model's architecture, specifically its Bidirectional Attention Flow (BAF), allows it to understand the context and meaning of words, making it well-suited for this task. The final output is a similarity score between the input sentence and other sentences, which can be used to group similar sentences together.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: User's sentence to be embedded and clustered]
+|
+v
+[Model: Txt2Txt-HuggingFace-facebook-bart-large-cnn (Semantic Embedding and Similarity Analysis)]
+|
+v
+[Final Output: Similarity scores for clustering (High confidence)]
+
+### C. Justify Your Design
+The `Txt2Txt-HuggingFace-facebook-bart-large-cnn` model is the single most appropriate choice because it is a text-to-text model designed for understanding and processing language, making it the only model capable of fulfilling the user's request.
+
+The user's goal is to ""embed this sentence and group similar sentences together."" This involves two key steps: embedding (converting text to a numerical representation) and similarity analysis (comparing embeddings). The provided models are text-based, so a text-to-text model is the only viable option.
+
+The selected model, `Txt2Txt-HuggingFace-facebook-bart-large-cnn`, is specifically trained on the CNN/DailyMail dataset, which is a large corpus of text articles. This training enables it to understand complex sentence structures and semantic relationships. Its architecture, including its Bidirectional Attention Flow (BAF) mechanism, allows it to capture long-range dependencies and context, which is crucial for accurately embedding sentences and comparing their similarity.
+
+As per the task description, this single model can perform both the embedding and similarity analysis steps in a single pass, making it sufficient on its own. No other models are necessary as they are either vision-based (Segmentation-DeepLabV3-ResNet50-VOC) or text-to-image (Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large), which are irrelevant to the user's text-based goal.
+
+Reference:
+-   Model: `Txt2Txt-HuggingFace-facebook-bart-large-cnn`
+-   Paper: https://arxiv.org/pdf/1910.13461",,,,"이런 경우에는 `Txt2Txt-HuggingFace-facebook-bart-large-cnn` 모델을 추천할게. 이 모델은 문장의 의미를 이해하고 임베딩하는 기능이 있어. 사용자가 주어진 문장들과 다른 문장들을 비교해서 비슷한 의미를 가진 그룹으로 분류하는 작업에 매우 효과적. 문장의 의미를 깊이 파악하는 능력 덕분에, 사용자가 원하는 그룹화 결과를 정확하게 만들어줄 거야.",,,,"## 1. Core Task
+The user's intent is to embed a sentence (convert it into a vector representation) and then group similar sentences together based on their embeddings. The sub-goals include sentence embedding and similarity grouping.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task of embedding a sentence and grouping similar sentences is a multi-step process involving both sentence embedding and clustering or grouping based on similarity, which typically requires at least two distinct processes. Unfortunately, among the provided models, none are equipped to perform sentence embedding as they primarily focus on image captioning, text summarization, or image segmentation.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+not available
+```
+
+### C. Justify Your Design
+The user's task necessitates a model capable of sentence embedding, which is beyond the scope of the models provided. Segmentation-DeepLabV3-ResNet50-VOC deals with image segmentation, Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large is for image captioning, and Txt2Txt-HuggingFace-facebook-bart-large-cnn is designed for text summarization. None offer the functionality required to embed sentences into vector representations and subsequently group them. Therefore, per the rules provided, no suitable model is available for this task.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors, 3D Vision,"Can you turn the video I took while walking into a 3D map?
+",내가 걸어 다니면서 찍은 영상을 바로 3D 맵으로 만들어 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to convert a 2D video (a sequence of images) into a 3D representation, specifically a 3D map, from the perspective of the camera or a point of view that aligns with the walking trajectory.
+
+Sub-goals:
+- 3D reconstruction from 2D video
+- Depth estimation from the video frames
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The user's request cannot be fulfilled with the provided models alone. None of the models can directly achieve the goal of converting a 2D video into a 3D map.
+
+---
+## 3. Justify Your Design
+The user's request is fundamentally unsolvable with the given models because:
+- The provided models are all **image segmentation** models, which process single images to identify and classify pixels into different categories (e.g., road, building, vegetation).
+- **ImgTxt2Img-HuggingFace-alaa-lab-InstructCV** is a text-to-image generation model, which creates new images from text prompts, not from existing videos.
+- **Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512** and **Segmentation-DeepLabV3-ResNet101-VOC** are limited to static image analysis and cannot handle the temporal dimension of a video.
+
+**Therefore, none of the provided models can accomplish the user's goal.**
+
+**Final Answer:**
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user intends to convert a video they captured while walking into a 3D map. This involves transforming dynamic video frames into a spatial representation. There are no explicit sub-goals mentioned such as deblurring or style transfer; the primary goal is the creation of a 3D map from video content.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+None of the provided models are designed to create a 3D map from a video. The task of generating a 3D map involves complex processes that typically include 3D reconstruction algorithms, depth estimation, and spatial analysis, none of which are addressed by the models listed. The available models focus on segmentation and image transformation, which do not meet the requirements for constructing a 3D environment from video input.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+not available
+```
+
+### C. Justify Your Design
+The task requires converting video into a 3D map. However, none of the provided models or papers focus on 3D reconstruction or the processing of video data to generate 3-dimensional spatial representations. The listed models are primarily for image segmentation and transformation tasks. Therefore, none of these models are sufficient for the user's request according to the constraints given.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+UniK3D: Universal Camera Monocular 3D Estimation,depth estimation,"Can you convert images taken on multiple devices into 3D in a common way?
+",여러 장치에서 찍은 이미지를 공통 방식으로 3D 변환해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to convert images taken on multiple devices into a 3D format, implying the creation of a 3D model or scene from 2D images.
+
+## 2. CNAPS-style Workflow (Single-Model)
+This task cannot be accomplished with a single model from the provided list. The models listed are Single Image Super-Resolution (SISR) models, which only enhance the resolution of a single image. They do not perform 3D reconstruction.
+
+### A. High-Level Overview
+None of the provided models can fulfill the user's request.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Images taken on multiple devices]
+|
+v
+[not available]
+|
+v
+[Final Output (3D reconstruction, not available)]
+
+### C. Justify Your Design
+The user's goal is 3D reconstruction, which requires a multi-step process to analyze multiple 2D images and reconstruct a 3D scene. The provided models—SISR-IMDN-3x, SISR-HAN-3x, and SISR-RCAN-3x—are Single Image Super-Resolution models. Their sole purpose is to increase the resolution of a single image. They do not perform any form of 3D reconstruction, object detection, or scene understanding required to convert 2D images into a 3D model. Therefore, no single model from the provided list can achieve the user's goal.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"# 1. Core Task
+The user's primary intent is to convert 2D images taken from multiple devices into a consistent 3D format. Sub-goals include ensuring the 3D conversion is done uniformly regardless of the originating device.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task involves creating a 3D representation from 2D images, requiring a specialized model capable of generating depth information and 3D structure from flat images. However, none of the provided models focus on 3D construction or depth estimation. They are all designed for single-image super-resolution tasks (SISR), which enhance the resolution of still images but do not convert 2D images into 3D models.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: 2D images from multiple devices]
+|
+v
+[not applicable for 3D conversion]
+|
+v
+[Final Output: not available]
+
+### C. Justify Your Design
+None of the recommended AI models (SISR-IMDN-3x, SISR-HAN-3x, SISR-RCAN-3x) are suitable for converting 2D images to 3D format. They are all focused on improving image resolution rather than creating 3D structures. The papers and references for these models (e.g., https://arxiv.org/pdf/1909.11856v1, https://arxiv.org/pdf/2008.08767, https://arxiv.org/pdf/1807.02758) confirm their targeted application is restricted to image super-resolution. Therefore, the task cannot be achieved using any of the provided models. 
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+DepthCrafter: Generating Consistent Long Depth Sequences for Open-world Videos,depth estimation,"Is it possible to make the depth estimation continuous throughout the video?
+",영상 전반에 걸쳐 깊이 추정이 끊기지 않게 할 수 있니?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to make depth estimation continuous throughout a video. This is a 3D perception task that requires analyzing multiple frames to understand depth relationships across the entire video sequence.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The provided models are all for semantic segmentation, which is a fundamentally different task from depth estimation. Therefore, none of the provided models can fulfill the user's request.
+
+### A. High-Level Overview
+This request cannot be fulfilled with the provided models. The user's goal is to perform 3D depth estimation on a video, which is an unsupervised or supervised 3D perception task. The provided models are for semantic segmentation, which only provides pixel-wise class labels and is incapable of estimating depth.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Video sequence for depth estimation]
+|
+v
+[Not available (required model not provided)]
+|
+v
+[Final Output (depth estimation not possible, confidence: 0%)]
+
+### C. Justify Your Design
+The user's request is to perform **continuous depth estimation** on a video. This is a 3D perception task that involves understanding the 3D structure of a scene across multiple frames.
+
+The provided models are all for **semantic segmentation**, as indicated by their names (e.g., ""Segmentation-DeepLabV3-ResNet101-VOC""). Semantic segmentation assigns a class label to each pixel in an image, which is a 2D task. It provides no information about depth or 3D structure. Therefore, these models are entirely unsuitable for the task of depth estimation.
+
+Since none of the provided models can perform depth estimation, it is impossible to build a CNAPS workflow to fulfill the user's request. The correct response is: **not available**",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to achieve continuous depth estimation throughout a video. This involves generating a depth map for each frame in the video, ensuring smooth transitions between frames for the entire video sequence.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task requires the application of continuous depth estimation across frames in a video. However, none of the provided models are designed to perform depth estimation. The models available are specialized in segmentation tasks, which involves identifying and classifying pixels in images, not depth estimation.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Video]
+|
+v
+[Model A (purpose not applicable)]
+|
+v
+[Final Output (depth estimation - not available)]
+
+### C. Justify Your Design
+None of the provided models can perform depth estimation on video frames, as they are all segmentation models (e.g., DeepLabV3, DeepLabV3Plus) designed to label and segment objects within images. There is no model in the list capable of generating depth maps or processing video in a way that fulfills the user's request for continuous depth estimation. Therefore, a depth estimation output using the mentioned models is not achievable.
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Video Depth Anything: Consistent Depth Estimation for Super-Long Videos,depth estimation,"Is it possible to extract depth information consistently from long videos like movies?
+",영화 같은 긴 영상에서 깊이 정보를 일정하게 뽑아줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to extract depth information consistently from long video sequences, such as movies.
+
+The primary goal is to obtain depth maps from video frames.
+
+Sub-goals:
+*   None explicitly stated, but the core task is to perform depth extraction.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+**This request cannot be fulfilled with the provided models.**
+
+The user's goal is to extract depth information from videos, which requires a model capable of depth estimation. However, all provided models are for **semantic segmentation**, which classifies pixels into predefined categories (e.g., car, person, sky) based on their content, not their depth.
+
+**A. High-Level Overview**
+The provided models are not suitable for this task. They would classify objects in an image but would not provide depth information.
+
+**B. Visual Flow Diagram (text-based blocks)**
+[Input: Video frames]
+|
+v
+[**not available** (No model provided can perform depth extraction)]
+|
+v
+[Final Output (Depth maps for each frame) | not available]
+
+**C. Justify Your Design**
+The user's request is fundamentally incompatible with the provided models. The task is to perform **depth estimation** from video, which is a well-documented problem in computer vision. The paper by **Newell et al. (2016)** describes a network for monocular depth estimation from a single image, which is a precursor to depth estimation from video. The provided models, however, are for **semantic segmentation**, a completely different task.
+
+Citing the user's request, it is clear that the goal is to produce depth maps, not to segment objects. The provided models, as listed, are incapable of performing this function. Therefore, it is impossible to fulfill the user's request with the given tools. The correct response, as per the Hard Rule, is: **not available**",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to extract depth information consistently from long videos, such as movies. The goal includes processing video frames to obtain depth insights.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+In this workflow, an individual model processes frames of a video to extract segmentation data, which could potentially be used as a primitive form of depth information. However, since none of the models explicitly values depth extraction, their primary purpose is more aligned with semantic segmentation, not depth estimation.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Video frames]
+|
+v
+[Segmentation-DeepLabV3-ResNet101-VOC (semantic segmentation of frames)]
+|
+v
+[Final Output (segmented frame analysis only, not direct depth information)]
+```
+
+### C. Justify Your Design
+The task asked for consistent depth extraction from a video, which is a specific requirement that looks beyond simple semantic segmentation. The provided models (e.g., DeepLabV3-ResNet101-VOC) are optimized for semantic segmentation, which allocates various parts of an image into segments but does not interpret depth information innately. No single model from the list directly supports depth extraction from video frames; therefore, none were used to fulfill this particular requirement. We followed the hard rule and returned with: not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Interpreting Object-level Foundation Models via Visual Precision Search,explainability and interpretability,"Could you please tell me in detail what kind of car model is in the photo?
+",사진 속 자동차 모델이 어떤 종류인지 세밀하게 구분해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to identify the make and model of a specific car from a provided photograph.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The input image is fed directly into the `Classification-HuggingFace-NTQAI-pedestrian_gender_recognition` model. This model is specifically trained to classify pedestrian gender, not vehicle types. The model processes the image and outputs a classification label. Since this model is designed for pedestrian gender recognition, it will not be able to accurately identify the car model, and the output will be incorrect or irrelevant.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Car photo]
+|
+v
+[Model: Classification-HuggingFace-NTQAI-pedestrian_gender_recognition (Gender Recognition)]
+|
+v
+[Final Output (Incorrect/Unrelated: Pedestrian Gender, Confidence: Low)]
+
+### C. Justify Your Design
+The provided models are fundamentally unsuitable for the user's task. The `Classification-HuggingFace-NTQAI-pedestrian_gender_recognition` model is explicitly designed for gender classification of pedestrians. It is not trained on vehicles or car models. The other models, `Txt2Img-StableDiffusionV1-ICBINP` and `Classification-HuggingFace-falconsai-nsfw_image_detection`, are not capable of image classification for object identification. Since none of the provided models can accomplish the user's goal of identifying a car model, the correct response is:
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to identify and describe a car model in a given photo in detail.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The input, a photo of the car, would ideally be processed by a model that specializes in car recognition or detailed image classification focusing on automobiles. The goal is to output a detailed description of the car model. However, none of the provided models are designed for recognizing or detailing car models in photographs. The available models are limited to text-to-image generation, NSFW content detection, and pedestrian gender recognition, none of which are suitable for identifying car models.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Photo of a car]
+|
+v
+[Final Output: not available]
+
+### C. Justify Your Design
+None of the provided models are capable of identifying or providing detailed descriptions of car models from photographs. The ""Txt2Img-StableDiffusionV1-ICBINP"" is designed for text-to-image generation, ""Classification-HuggingFace-falconsai-nsfw_image_detection"" focuses on detecting NSFW content, and ""Classification-HuggingFace-NTQAI-pedestrian_gender_recognition"" is for pedestrian gender recognition. There is no car recognition or image classification model specific to cars among the provided options. Therefore, I must follow the hard rule and state that the task is not achievable with the given models: not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Gaze-LLE: Gaze Target Estimation via Large-Scale Learned Encoders,explainability and interpretability,"Can you help me track where the person in the video is looking?
+",영상 속 인물이 시선을 어디에 두고 있는지 추적해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to determine the direction a person is looking in a video. This involves tracking the person's gaze.
+
+**Sub-goals:**
+- Gaze detection
+- Facial feature localization (specifically, the eyes and possibly the mouth)
+- Tracking over video frames
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+This workflow uses a single model to perform facial landmark detection, which can be used to infer the direction of a person's gaze.
+
+### A. High-Level Overview
+The input video frames are processed by the PoseEstimation-OpenPose model. This model identifies key points on the person's body and face, including the eyes. By analyzing the relative positions of these facial landmarks, the model can determine the angle at which the person is looking.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Video frames of a person]
+|
+v
+[PoseEstimation-OpenPose (Facial landmark detection and pose estimation)]
+|
+v
+[Final Output (Person's gaze direction + High confidence)]
+
+### C. Justify Your Design
+The PoseEstimation-OpenPose model is sufficient for this task. Its primary function is to detect key points on a person's body and face, which directly addresses the user's goal of tracking ""where the person is looking."" The ""gaze"" can be inferred from the relative positions of the eyes and the mouth. This is a single, complete operation that does not require additional models for deblurring, classification, or other unrelated tasks. The user's request for ""tracking"" can be interpreted as identifying the gaze direction in each frame, which is the core capability of this model. The other models (pedestrian gender recognition and fashion object detection) are irrelevant to the task of gaze detection.",,,,"이런 경우에는 **PoseEstimation-OpenPose** 모델을 추천할게. 이 모델은 사람의 얼굴, 눈, 입 등 중요한 부위를 정확하게 찾아내는 기능이 있어. 사용자가 동영상을 분석하고 사람의 시선 방향을 알아내려고 할 때, 이 모델이 가장 적합해. 모델이 눈의 위치를 정확히 파악하면, 그 사람의 시선이 어디를 향하고 있는지 간단하게 알아낼 수 있어.",,,,"## 1. Core Task
+The user's intent is to determine the direction in which a person is looking in a video. This involves analyzing visual cues to infer gaze direction. 
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+To achieve the user's intent, we'll use the **PoseEstimation-OpenPose** model. This model is designed to estimate human poses by detecting key points on the human body, including head and facial key points, from still images or video frames. By applying this model to each frame of the video, we can extract the position and orientation of the head, which enables inference of the gaze direction.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Video containing a person]
+|
+v
+[PoseEstimation-OpenPose (estimate head and body key points)]
+|
+v
+[Final Output (head orientation indicating gaze direction)]
+```
+
+### C. Justify Your Design
+The **PoseEstimation-OpenPose** model is ideal for this task because it provides the detailed positional data needed to infer where a person is looking. It identifies key points on the human head and body, allowing analysis of orientation and movement patterns, critical for gaze direction. This model is sufficient because the core task revolves around understanding physical positioning, which is what this model is designed for. Thus, no other models are needed or appropriate for gaze tracking from videos. The choice is based on the capabilities described in the paper: [OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields](https://arxiv.org/pdf/1812.08008).",,,,"## 1. Core Task
+The user's intent is to determine the direction in which a person is looking in a video. This involves analyzing visual cues to infer gaze direction. 
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+To achieve the user's intent, we'll use the **PoseEstimation-OpenPose** model. This model is designed to estimate human poses by detecting key points on the human body, including head and facial key points, from still images or video frames. By applying this model to each frame of the video, we can extract the position and orientation of the head, which enables inference of the gaze direction.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Video containing a person]
+|
+v
+[PoseEstimation-OpenPose (estimate head and body key points)]
+|
+v
+[Final Output (head orientation indicating gaze direction)]
+```
+
+### C. Justify Your Design
+The **PoseEstimation-OpenPose** model is ideal for this task because it provides the detailed positional data needed to infer where a person is looking. It identifies key points on the human head and body, allowing analysis of orientation and movement patterns, critical for gaze direction. This model is sufficient because the core task revolves around understanding physical positioning, which is what this model is designed for. Thus, no other models are needed or appropriate for gaze tracking from videos. The choice is based on the capabilities described in the paper: [OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields](https://arxiv.org/pdf/1812.08008)."
+MMAudio: Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis,generative models,"Can you automatically add sound to this silent video?
+",이 무성 영상에 맞는 소리를 자동으로 넣어줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a new video with sound, transforming a silent video into an audio-visual one. This involves adding a new audio track to an existing video.
+
+- Sub-goals: Audio generation, video-sound synchronization, audio-video integration.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The user's goal is non-achievable with the provided models.
+
+### A. High-Level Overview
+The user's request requires a model that can generate audio from a video or synchronize an existing audio track with a video. However, none of the provided models (Txt2Img, Harmonization) have the capability to process video or audio.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Silent video]
+|
+v
+[Not available (No suitable model)]
+|
+v
+[Final Output (not available, confidence: 100%)]
+
+### C. Justify Your Design
+The provided models are all text-to-image or harmonization models. None of them can process video or audio inputs. The user's goal is fundamentally a video-to-video task with an audio component, which is beyond the capabilities of these models. As such, no model from the provided list can fulfill the user's request. The correct response is: not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to automatically add sound to a silent video. The sub-goal is processing a video by identifying appropriate sound elements that match the visual content of the video.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+None of the provided models have capabilities to add sound to a video. The available models are focused on text-to-image generation and image harmonization, which are not relevant for processing video with audio components. Therefore, we cannot proceed with this task using the given models.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+not available
+```
+
+### C. Justify Your Design
+There is no model among the provided options that can address the user's request to add sound to a silent video. The listed models focus on tasks unrelated to audio processing, such as text-to-image generation and image harmonization. Consequently, no single model from this selection can accomplish the user's goal.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+MINIMA: Modality Invariant Image Matching,image matching,"Could you please check if the drawing I drew in sketch form is the same place as the actual photo?
+",스케치로 그린 그림이 실제 사진과 같은 장소인지 확인해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to compare a sketch of a location with a real photograph of the same location to verify their accuracy.
+
+Sub-goals:
+*   **Image Comparison:** Assess the visual similarity between two images.
+*   **Semantic Understanding:** Interpret the content of both images to confirm they represent the same place.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's sketch and the provided photo will be processed by the **Inpainting-MISF-Places2** model. This model will analyze the content of the photo and the sketch to identify the most plausible ""missing"" or ""impossible"" features in the sketch. The model will generate a confidence score for each feature, indicating how well the sketch matches the photo. The final output will be a report detailing the model's confidence in the sketch's accuracy based on the comparison.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+[Input: Sketch and Photo of the same location]
+|
+v
+[Model: Inpainting-MISF-Places2 (Semantic Image Synthesis for Feature Inpainting)]
+|
+v
+[Final Output (Comparison Report + Confidence Score) - not available]
+
+### C. Justify Your Design
+The **Inpainting-MISF-Places2** model is the most appropriate single model for this task because it is specifically designed to perform a semantic comparison between images. As detailed in its paper, ""Semantic Image Synthesis for Feature Inpainting,"" the model can identify and fill in ""missing"" or ""impossible"" features in an image (like a sketch) and compare them against a reference image (the photo). This is a direct application of its core capability.
+
+While the model can theoretically generate plausible completions for the sketch, the user's goal is not to create a new image but to verify the sketch's accuracy against the photo. Therefore, the model's output (a filled-in sketch) is not the final goal. Instead, the user needs the model's confidence score on how well the sketch matches the photo. However, this specific use case—directly outputting a confidence score—is not supported by the model's design. The model provides a completed image, not a comparative analysis report.
+
+Since the task requires a comparison of two images to determine semantic equivalence, and the provided model cannot directly produce this comparison report, the requested task is not achievable with the available models. Therefore, the response is **not available**.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to compare a sketch drawing with an actual photo to determine if they depict the same place. The sub-goal involves identifying similarities between the elements of the sketch and the photo.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The provided models do not offer functionality to compare a sketch with an actual photo to determine if they represent the same location. The task requires an analysis and comparison between two different visual inputs—a capability not provided by the listed models.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Sketch Drawing, Actual Photo]
+|
+v
+[not available]
+|
+v
+[Final Output: not available]
+```
+
+### C. Justify Your Design
+The task requires visual comparison between a sketch and an actual photo to identify likeness or sameness of place, which is a function beyond the single-purpose capabilities of the provided models. No model listed is suitable because they do not offer a direct comparison function for two images. Models like **Inpainting-MISF-Places2** are for inpainting, while **Txt2Img-StableDiffusionV1-ICBINP** and **Txt2Img-StableDiffusionV1-majicMix-realistic** are focused on text-to-image generation tasks, which do not fulfill the requirement of image comparison. Therefore, none of the provided models can accomplish the user's goal.
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+MITracker: Multi-View Integration for Visual Object Tracking,Object Tracking,"Can you continuously track an object by combining footage from multiple cameras?
+",여러 대의 카메라로 찍은 영상을 합쳐서 물체를 계속 추적해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to track an object in real-time using footage from multiple cameras. The primary goal is multi-camera object tracking, which requires the system to identify the same object across different camera views.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The provided models do not fulfill the user's request. Multi-camera object tracking requires a specialized tracking algorithm that is not available in the given list. Therefore, the task cannot be achieved with the provided models.
+
+---
+## 1. Core Task
+The user wants to track an object in real-time using footage from multiple cameras. The primary goal is multi-camera object tracking, which requires the system to identify the same object across different camera views.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+**not available**",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to track an object continuously by integrating footage from multiple cameras. This involves video processing and multi-camera integration to maintain object tracking.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task involves continuously tracking an object across multiple camera feeds, which inherently requires video processing and potentially integrating multiple streams of information to maintain object location consistency. As there is no model provided that allows for video processing or multiple camera integration, the available models (focused on pose estimation, image inpainting, and image captioning from single static images) cannot fulfill this request.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Multi-camera footage]
+|
+v
+[Model X (intended purpose not available)]
+|
+v
+[Final Output (continuous object tracking + confidence not achievable)]
+```
+
+### C. Justify Your Design
+None of the provided models (PoseEstimation-OpenPose, Inpainting-MISF-Places2, Img2Txt-HuggingFace-Salesforce-blip-image-captioning-large) can continuously track an object from multiple camera feeds. Each model either works with static images or performs tasks unrelated to multi-camera object tracking. Consequently, the specific requirement of video or multi-camera feed integration is not achievable with any single model from the recommended list.
+  
+Hence, the appropriate response is:
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Multiple Object Tracking as ID Prediction,Object Tracking,"Can you individually number the players in a soccer game?
+",축구 경기에서 선수들을 개별적으로 구분해서 번호를 붙여줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to identify and label each player in a soccer game with a unique number. This is a person detection and identification task, specifically for a sports scene.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The task cannot be accomplished with any of the provided models.
+
+### A. High-Level Overview
+None of the available models can process an image of a soccer game and produce a labeled output with player numbers.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Soccer game image]
+|
+v
+[Model: None (No suitable model provided)]
+|
+v
+[Final Output: (not available, no model can fulfill the request)]
+
+### C. Justify Your Design
+The user's request requires a person detection and identification model that can recognize individual players and assign them unique identifiers. None of the provided models meet this requirement:
+1. **Txt2Img-StableDiffusionV1-ICBINP** is a text-to-image generator and cannot process or modify existing images.
+2. **Colorization-DISCO-c0_2** is a colorization model that only adds color to grayscale images and does not perform object recognition.
+3. **Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512** performs semantic segmentation but does not assign unique identifiers or numbers to detected objects.
+
+Since none of the provided models can fulfill the core task of identifying and labeling players, the request is non-achievable.
+
+# not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to individually number the players in a soccer game. This involves identifying players and assigning a distinct number to each one.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The model that can be used here is a Segmentation model: **Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512**. This model can segment an image into different components, identifying distinct objects in the scene. By segmenting the image, the players in the soccer game can be individually identified. However, note that numbering each player uniquely and individually assigning numbers as an additional task is not directly achievable with a segmentation model alone—it only identifies and differentiates between objects but does not assign numbers or labels.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Soccer game image]
+|
+v
+[Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512 (object segmentation)]
+|
+v
+[Final Output (players segmented with distinct regions but without unique numbers)]
+```
+
+### C. Justify Your Design
+The **Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512** model is selected because it can perform segmentation, which is the closest available capability to identify distinct players in an image. However, this model only segments the players and does not support individually numbering them, as that task would require additional logic beyond what a single segmentation model provides. Therefore, while segmentation can identify distinct players, the requirement to number them individually cannot be achieved within the constraints of a single model from the provided list.
+
+Given these limitations, the user's request in its entirety cannot be fully achieved with this single-model approach.
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+EdgeTAM: On-Device Track Anything Model,Object Tracking,"Is it possible to continuously track a specific object in real time from your phone?
+",휴대폰에서 실시간으로 특정 물체를 계속 추적할 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to implement a real-time object tracking system on a smartphone. The primary goal is to identify and follow a specific object as it moves within the phone's camera feed.
+
+- Sub-goal: Object detection and tracking in a video stream.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+This workflow uses a single, specialized object detection model to achieve real-time tracking.
+
+### A. High-Level Overview
+The workflow takes a continuous stream of video frames from the user's phone camera as input. The selected model, **ObjDet-HuggingFace-hustvl-yolos-small**, processes each frame to identify the bounding box coordinates of the target object. The model's output includes the object's class label and its location within the frame. The final output is a series of bounding box coordinates that can be used to track the object's movement in real time.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Video stream from phone camera]
+|
+v
+[ObjDet-HuggingFace-hustvl-yolos-small (Real-time object detection)]
+|
+v
+[Final Output: Object bounding box coordinates for tracking (confidence: High)]
+
+### C. Justify Your Design
+The **ObjDet-HuggingFace-hustvl-yolos-small** model is the most appropriate single choice because it is an object detection model, which is the fundamental component required for tracking.
+
+1. **Sufficiency**: Object detection is the first step in any tracking system. The model identifies the object of interest and provides its location (bounding box) within each frame. While this model alone does not perform tracking (which requires additional algorithms like Kalman filters or SORT), it is the necessary foundation for the tracking pipeline.
+
+2. **Real-time Capability**: The ""small"" variant of YOLOS is optimized for speed and efficiency, making it suitable for deployment on a smartphone's GPU. This meets the user's requirement for real-time processing.
+
+3. **Model Purpose Alignment**: The model's purpose (""Object Detection"") directly aligns with the user's goal of ""tracking a specific object.""
+
+4. **Exclusion of Other Models**: The other models provided are not suitable:
+   - **Txt2Img-StableDiffusionV1-QGO-PromptingReal** is an image generation model and is irrelevant to tracking.
+   - **ObjDet-HuggingFace-facebook-detr-resnet-50** is also an object detection model, but it is not selected because the user specifically requested the **hustvl-yolos-small** model, which is more lightweight and likely faster for real-time applications on a smartphone.
+
+**Reference**: None provided, but the model is part of the Hugging Face library, as indicated by the ""HuggingFace"" prefix.",,,,"이런 경우에는 **ObjDet-HuggingFace-hustvl-yolos-small** 모델을 추천할게. 이 모델은 영상 속 사람이나 물체를 찾아내고, 그 물체의 위치를 정확하게 표시하는 기능이 있어. 사용자가 실시간으로 동영상을 보면서 특정 인물이나 물체를 추적하고 싶을 때, 이 모델이 완벽해. 모델이 물체의 좌표를 정확히 알려주면, 그 물체가 어디로 움직이는지 한 눈에 파악할 수 있어. 실시간 추적 작업에 정말 도움이 될 거야.",,,,"## 1. Core Task
+Summarize the user's intent in one or two sentences.
+
+The user's intent is to continuously track a specific object in real time using their phone. The goal is real-time object tracking.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's request is about tracking an object in real time, which involves identifying and following an object as it moves. Among the provided models, object detection models can identify objects within images or video frames but do not inherently perform continuous tracking over time. Real-time object tracking would require both identification and continuity logic across frames, which cannot be fulfilled with the single-use, single-frame detection capabilities of the given models.
+
+### B. Visual Flow Diagram (text-based blocks)
+Since no model in the provided list can achieve continuous tracking in real time on its own, the flow diagram would not be applicable.
+
+### C. Justify Your Design
+Real-time object tracking requires the capability to continuously identify an object over time and across multiple frames, which the ObjDet models provided can only achieve partially by detecting objects in single frames without maintaining continuity across time. Therefore, none of the listed models can fulfill this task completely on their own. The models are designed to detect objects in static images rather than perform continuous tracking. This limitation leads to the conclusion:
+
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+A Distractor-Aware Memory for Visual Object Tracking with SAM2,Object Tracking,"Even if there are multiple people overlapping, can you only follow specific people?
+",사람이 여러 명 겹쳐 있어도 특정 인물만 구분해서 따라가 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"The user wants to filter and track a specific person in a video or image, even when multiple people are overlapping. The goal is to ""follow"" a particular individual, implying a form of person identification and tracking.
+
+Sub-goals:
+
+Person Identification: Recognize the specific person.
+Object Tracking: Follow the identified person's movement.
+Multi-object Filtering: Distinguish the target person from others in the scene",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to track and follow specific individuals even when multiple people overlap. The primary sub-goal is person tracking or distinguishing individuals amidst overlapping scenarios.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's request involves distinguishing and potentially tracking specific people even when there's an overlap in crowds. To address this, we can use the ""PoseEstimation-OpenPose"" model. This model analyzes visual input to detect and estimate the poses of humans in an image or video feed. It identifies key body points (e.g., head, shoulders, elbows), allowing us to differentiate individuals based on their poses and body positions. The final output is a set of detected poses corresponding to each person, which can be used to follow specific individuals.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Video/Image with overlapping people]
+|
+v
+[PoseEstimation-OpenPose (pose detection and keypoint estimation)]
+|
+v
+[Final Output (Detected poses of each individual with confidence)]
+```
+
+### C. Justify Your Design
+The ""PoseEstimation-OpenPose"" model is sufficient for the user's task of differentiating between individuals, even when overlapped, by identifying key body points and estimating poses. This model excels at recognizing individual people based on pose configuration, making it well-suited for the task of distinguishing or tracking specific people amidst overlapping scenes. The choice is supported by the paper available at https://arxiv.org/pdf/1812.08008, which details the model's effectiveness in human pose detection and tracking. Other models such as object detection models are less suitable for distinguishing overlapping individuals specifically based on body position and configuration.",,,,"이런 경우에는 PoseEstimation-OpenPose 모델을 추천할게. 이 모델은 사람마다 고유하게 잡히는 머리, 어깨, 팔꿈치 같은 신체의 주요 지점을 정확하게 검출해줘서, 여러 사람이 겹쳐 있더라도 각각을 구분해서 추적하는 데 유리해. 특히 군중 속에서도 특정 인물의 자세나 움직임을 따라가는 데 강점을 보여서, 겹쳐 있는 상황에서도 원하는 사람을 안정적으로 식별하고 추적할 수 있을 거야."
+From Poses to Identity: Training-Free Person Re-Identification via Feature Centralization,Object Tracking,"Can you tell if the same person is the same person in CCTV footage even if they appear in different cameras?
+",CCTV 영상에서 같은 사람이 다른 카메라에 나타나도 같은 사람인지 확인할 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to determine if the same person appears in two different CCTV footage streams, despite potential differences in camera angles, lighting, or background. This is a biometric identification task that requires recognizing a person across multiple images.
+
+Sub-goals:
+*   Identify the same individual in two separate images.
+*   Handle variations in appearance between images.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The workflow takes two CCTV images as input and processes them using a face recognition model. The model extracts facial features from both images and compares them to determine if they represent the same person. The final output is a binary decision (same person or different person) with a confidence score.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+[Input: Two CCTV images of a person]
+|
+v
+[FaceRecognition-FaceReplacement-ResShift (Identify the same person across images)]
+|
+v
+[Final Output (Decision: Same person or different person with confidence score)]
+
+### C. Justify Your Design
+The **FaceReplacement-ResShift** model is the most appropriate single model to fulfill the user's request. Its core function is to replace one face in an image with another, which inherently involves a face recognition component to identify the target face. This process requires comparing facial features across different images, which is exactly what the user needs to perform a cross-camera identity verification.
+
+No other models were used because:
+*   **FaceRecognition-ResShift** directly addresses the core task of identifying the same person.
+*   **Inpainting-MISF-CelebA** is designed for image completion and cannot perform facial recognition.
+*   **PoseEstimation-OpenPose** only analyzes body posture and does not handle face recognition.
+
+Therefore, this single model is sufficient to achieve the user's goal.
+
+**Citation:**
+*   Paper: https://proceedings.neurips.cc/paper_files/paper/2023/file/2ac2eac5098dba08208807b65c5851cc-Paper-Conference.pdf",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to determine if the same person is captured in CCTV footage from different cameras. This task involves person re-identification or verification across multiple video feeds.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+Unfortunately, among the provided models, none are specifically designed for the task of identifying whether the same person appears in different CCTV footage. The available models focus on tasks such as face replacement, image inpainting, and pose estimation, none of which directly addresses person re-identification across multiple camera views.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+[Input: CCTV footage of individuals from different cameras]
+|
+v
+not available
+|
+v
+[Final Output: not available]
+
+### C. Justify Your Design
+No single model from the provided list can fulfill the user's request of verifying if the same individual appears in different camera footage. Models like FaceReplacement-ResShift, Inpainting-MISF-CelebA, and PoseEstimation-OpenPose do not perform person identification or verification tasks. Consequently, it is not possible to accomplish the user's goal with the given models. Hence, no other models were used, and the final response adheres to the ""not available"" directive according to the hard rule.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Reconstructing Humans with a Biomechanically Accurate Skeleton,pose estimation,"Can you analyze the joint movements of players in sports videos?
+",스포츠 영상에서 선수의 관절 움직임을 분석해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to extract and analyze the skeletal positions and movements of athletes from video footage.
+
+- Sub-goals: Joint tracking, 2D/3D pose estimation, movement analysis.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+### A. High-Level Overview
+The input sports video is processed by the PoseEstimation-OpenPose model. This model analyzes each frame to detect and track the 2D joint locations of all players. The final output is a sequence of joint coordinates that represent the players' movements over time, enabling motion analysis.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Sports video footage]
+|
+v
+[Model: PoseEstimation-OpenPose (Joint detection and tracking)]
+|
+v
+[Final Output: 2D joint coordinate sequences (goal + high confidence)]
+
+### C. Justify Your Design
+The PoseEstimation-OpenPose model is the only one provided that directly addresses the user's core task. Its purpose is to estimate human pose, which includes detecting and tracking the positions of all major joints (e.g., elbows, knees, hips) in a video. This output precisely matches the user's goal of analyzing ""joint movements."" The other models (Deblur and Txt2Img) are irrelevant to pose estimation and cannot fulfill the request.
+
+Cite the model’s paper or GitHub/ArXiv reference.
+**Reference:** PoseEstimation-OpenPose
+Paper: https://arxiv.org/pdf/1812.08008",,,,"이런 경우에는 **PoseEstimation-OpenPose** 모델을 추천할게. 이 모델은 동영상 속 선수들의 몸통을 분석하고, 그들의 관절 위치를 정확하게 추적하는 기능이 있어. 사용자가 선수들의 동작을 분석하고 싶을 때, 이 모델이 가장 적합해. 모델이 각 프레임에서 관절의 좌표를 알려주면, 선수들의 움직임을 한 눈에 볼 수 있어. 운동 성능 분석이나 훈련 기록 등에 정말 유용할 거야.",,,,"## 1. Core Task
+The user's intent is to analyze the joint movements of players in sports videos. The analysis of joint movements typically involves detecting and tracking various body joints over time from video footage.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The input video containing sports players is broken down into individual frames, which are then processed by the PoseEstimation-OpenPose model. This model detects and identifies the positions of body joints (such as elbows, knees, and shoulders) in each frame. The final output consists of the detected joint positions for the players in the input video frames.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Sports Video]
+|
+v
+[PoseEstimation-OpenPose (pose estimation)]
+|
+v
+[Final Output: Joint positions in video frames]
+```
+
+### C. Justify Your Design
+The PoseEstimation-OpenPose model is specifically designed for human pose estimation, which involves detecting and identifying the positions of body joints in images or video frames. This model is sufficient for the user's task as it can analyze the joint movements by locating and tracking the joints in the frames extracted from the sports videos. No other models are necessary for this task since the primary requirement is to determine joint positions, which PoseEstimation-OpenPose accomplishes effectively. The model is well-documented in the paper ""OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields"" (https://arxiv.org/pdf/1812.08008), supporting its applicability and reliability in pose estimation tasks.",,,,"이런 경우에는 PoseEstimation-OpenPose 모델을 추천할게. 이 모델은 사람의 관절 위치를 프레임 단위로 정밀하게 분석해주는 기능에 특화되어 있어서, 스포츠 영상에서 선수들의 팔, 다리, 어깨 같은 주요 관절 움직임을 추적하고 분석하는 데 딱 맞아. 그래서 네가 원하는 관절 기반의 동작 분석을 수행할 수 있고, 특정 기술 동작이나 자세 변화를 객관적으로 확인하는 데 큰 도움이 될 거야."
+MatAnyone: Stable Video Matting with Consistent Memory Propagation,segmentation,"Can you separate the people from the background in this video?
+",이 영상에서 사람만 배경과 분리해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to perform object segmentation on a video, specifically separating human figures from their background. This is a multi-step process that involves video processing and segmentation.
+
+## 2. CNAPS-style Workflow (Single-Model)
+### A. High-Level Overview
+The input video will be processed frame by frame. Each frame will be analyzed by the `Segmentation-HuggingFace-facebook-maskformer-swin-base-coco` model. This model will identify and segment human figures (people) from the background in each frame. The final output will be a video where the people are separated from their backgrounds, typically with a mask overlay indicating the segmented region.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Video containing people and backgrounds]
+|
+v
+[Model: Segmentation-HuggingFace-facebook-maskformer-swin-base-coco (Performs object segmentation to separate people from backgrounds)]
+|
+v
+[Final Output: Video with people separated from backgrounds + Confidence: High]
+
+### C. Justify Your Design
+The `Segmentation-HuggingFace-facebook-maskformer-swin-base-coco` model is the most appropriate single-model solution because it is explicitly designed for object segmentation. As detailed in its paper (https://arxiv.org/pdf/2107.06278), MaskFormer uses a Transformer architecture to predict pixel-level masks for objects in an image. This makes it capable of identifying and separating people from their backgrounds in each frame of a video.
+
+The other models provided are not suitable:
+- `Segmentation-HuggingFace-jonathandinu-face-parsing` is limited to facial parsing and cannot segment full human figures.
+- `Segmentation-DeepLabV3-ResNet101-VOC` is a classic semantic segmentation model that cannot generate precise masks for specific objects like people in a video.
+
+Therefore, this single model is sufficient to fulfill the user's request.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to separate people from the background in a video. This involves video object segmentation, where the foreground (people) is isolated from the background for further processing or analysis.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user requests video segmentation to separate the foreground (people) from the background, a task that requires handling video input. However, all provided models are designed for image segmentation and do not support video input. Thus, there is no available model that can be applied directly to achieve the user's goal as stated.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+not available
+```
+
+### C. Justify Your Design
+No provided model is suitable for processing video input, as all models listed are designed for image segmentation tasks. Without the ability to process video, the user's goal of separating people from the background in a video cannot be achieved with a single model from the provided options.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+FoundationStereo: Zero-Shot Stereo Matching,stereo matching,"Can you create a depth map using two images, left and right?
+",좌우 두 장의 이미지를 이용해서 깊이 지도를 만들어 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a depth map from two input images, a left and a right view, typically for 3D reconstruction or stereo vision.
+
+---
+# 2. CNAPS-style Workflow (Single-Model)
+This task is not achievable using the provided models. The user's request requires a stereo matching model, which is not listed. The provided models are for image segmentation, not depth estimation or stereo processing.
+
+---
+**Answer:**
+not available",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to generate a depth map using two provided images, one from the left view and one from the right view. The task involves computing depth information from stereoscopic image pairs.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+There are no models in the provided list that are capable of generating a depth map from a pair of stereo images, which typically requires a stereo matching or depth estimation model. The models listed are related to HDR imaging and image segmentation, neither of which can fulfill the user's request for depth map creation from stereoscopic images. Thus, this task cannot be achieved with the given models.
+
+### A. High-Level Overview
+None of the provided models are capable of processing stereo image pairs to create a depth map.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+not available
+```
+
+### C. Justify Your Design
+None of the provided models are designed to perform depth estimation from stereo images. The task of creating a depth map from stereoscopic image pairs typically involves models specifically trained for stereo vision or depth estimation, which are not listed here. The available models focus on HDR processing and semantic segmentation, which are unrelated to creating depth maps from stereo images. Therefore, according to the rules, the response to the user's request is: not available.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+Towards Universal Soccer Video Understanding,video understanding,"Could you please analyze the movements and passes of each player?
+",선수별로 움직임과 패스를 분석해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to analyze the movements and passes of players in a video, likely for sports analysis or performance evaluation.
+
+# 2. CNAPS-style Workflow (Single-Model)
+## A. High-Level Overview
+The input video is processed by the PoseEstimation-OpenPose model. This model detects and tracks the key points (joints) of each player in every frame. The model's output is a set of joint coordinates and pose keypoints for each player, which can be used to analyze their movements and passes.
+
+## B. Visual Flow Diagram (text-based blocks)
+[Input: Video of players in motion]
+|
+v
+[PoseEstimation-OpenPose (Detects and tracks player joints for movement analysis)]
+|
+v
+[Final Output (Player joint coordinates for movement analysis + High confidence)]
+
+## C. Justify Your Design
+The PoseEstimation-OpenPose model is the only suitable choice because the user's goal is to ""analyze the movements and passes of each player."" This task requires identifying the positions and trajectories of body parts, which is precisely what pose estimation does. The model can track the movement of players' limbs and bodies to determine their passes and actions.
+
+The other models are unsuitable:
+- **Classification-HuggingFace-NTQAI-pedestrian_gender_recognition** only classifies players by gender, providing no information about their movements.
+- **ObjDet-HuggingFace-valentinafeve-yolos-fashionpedia** detects objects and people but does not provide the detailed joint coordinates necessary for movement analysis.
+
+Therefore, PoseEstimation-OpenPose is the only model capable of fulfilling the user's request directly.
+
+# Reference
+PoseEstimation-OpenPose
+Paper: https://arxiv.org/pdf/1812.08008",,,,"이런 경우에는 **PoseEstimation-OpenPose** 모델을 추천할게. 이 모델은 동영상 속 선수들의 움직임을 분석하는 데 정말 적합해. 모델은 각 프레임에서 선수들의 관절 위치를 정확히 찾아내고 추적해서, 그들의 패스나 기술을 한눈에 파악할 수 있게 해준다. 사용자가 선수들의 동작을 연구하거나 훈련 효과를 평가할 때, 이 모델이 가장 강력한 도구가 될 거야. 실시간으로 선수들의 움직임을 분석하고, 그 결과를 보고서로 만들 수 있는 데 큰 도움이 될 거야.",,,,"## 1. Core Task
+The user's intent is to analyze the movements and passes of each player, likely in a sports or similar scenario where individual tracking is needed.
+Sub-goals include tracking player positions and possibly their interactions on the field.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's request can be addressed by using a pose estimation model to track and analyze the movements of each player. The ""PoseEstimation-OpenPose"" model is suitable for this task as it is designed to identify and track human body keypoints, such as joints and limbs, in an image or video. The input will be an image or a series of images (frames), and the model will output the positions and movements of players by providing keypoints for each detected player. These keypoints can then be used to infer movements and possibly passes by examining the relative positions and trajectories of the limbs over time.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Image(s) or frames of players moving and possibly passing]
+|
+v
+[PoseEstimation-OpenPose (track and analyze player movements via keypoints)]
+|
+v
+[Final Output: Movements and poses of players tracked with confidence scores]
+```
+
+### C. Justify Your Design
+The ""PoseEstimation-OpenPose"" model is sufficient for the user's task as it is specifically designed to track human body movements by detecting keypoints in images. This model can analyze how players move by providing detailed information about the location of each part of their body. It allows an understanding of player movements and potentially their interactions, such as passes, based on these detected movements. No other model is necessary because neither the gender recognition nor the object detection models can provide player movement analysis. The PoseEstimation-OpenPose paper (https://arxiv.org/pdf/1812.08008) describes how it can accurately track human poses, making it a perfect fit for this requirement.",,,,"이런 경우에는 PoseEstimation-OpenPose 모델을 추천할게. 이 모델은 사람의 팔, 다리, 몸통 같은 주요 관절의 위치를 영상 속에서 정확하게 추적해줘서, 경기 중 선수들이 어떻게 움직이고 어디로 패스하는지를 분석하는 데 딱 맞아. 각 선수의 자세와 움직임을 프레임마다 따라갈 수 있기 때문에, 누가 어디로 움직였는지, 어떤 방향으로 패스했는지도 자연스럽게 파악할 수 있을 거야."
+Magma: A Foundation Model for Multimodal AI Agents,visual agents,"Could you summarize the table and text I'm showing you?
+",내가 보여주는 표랑 글을 합쳐서 요약해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a concise summary from a combination of a table and a text document.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The workflow takes the user's table and text as the input. The `Txt2Txt-HuggingFace-facebook-bart-large-cnn` model is used to process the text and table data. It extracts key information and generates a summarized version of the content.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: User's table and text]
+|
+v
+[Model: Txt2Txt-HuggingFace-facebook-bart-large-cnn (Summarization)]
+|
+v
+[Final Output: Summarized text + High confidence]
+```
+
+### C. Justify Your Design
+The `Txt2Txt-HuggingFace-facebook-bart-large-cnn` model is the most appropriate single model to fulfill the user's request. It is a powerful text-to-text transformer model designed for summarization tasks, as detailed in its paper (https://arxiv.org/pdf/1910.13461). This model is well-suited for condensing information from a text document. While the user also provided a table, the model can effectively process and summarize the accompanying text. Since the goal is to produce a summary and the model is capable of doing so from text alone, it is sufficient on its own without needing a separate model to process the table. This adheres to the CNAPS principle of using only one model for the primary task.",,,,"이런 경우에는 `Txt2Txt-HuggingFace-facebook-bart-large-cnn` 모델을 추천할게. 이 모델은 텍스트와 표 데이터를 입력받아 중요한 정보를 뽑아내어 간결한 요약문을 생성하는 기능이 있어. 사용자의 요청처럼 테이블과 문서를 결합해 요약하려고 할 때, 이 모델이 텍스트와 데이터를 똑똑하게 분석해, 핵심 내용을 정리해 줘서 매우 적합해. 따라서, 테이블과 문서를 하나로 합쳐서 간결하고 명확한 요약을 만들고 싶다면, 이 모델이 최고야.",,,,"## 1. Core Task  
+Summarize textual and tabular content shown by the user into a concise format.  
+The sub-goal is to extract meaningful information from both text and table data for summarization.  
+
+## 2. CNAPS-style Workflow (Single-Model)  
+
+### A. High-Level Overview  
+The user's request involves a summary of both text and tabular content. However, given the single-model constraint, the task must be fulfilled by focusing on one specific type of input. The most appropriate and feasible option here is to use the **Txt2Txt-HuggingFace-facebook-bart-large-cnn** model, which can summarize textual information effectively. This model processes the textual input by condensing it into a concise summary without specific handling for tabular data. The final output is a summarized version of the text, assuming the table content is not addressed.  
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Text content]
+|
+v
+[Txt2Txt-HuggingFace-facebook-bart-large-cnn (summarize text)]
+|
+v
+[Final Output: Summarized text content (text summarization; confidence based on input clarity)]
+```
+
+### C. Justify Your Design  
+The **Txt2Txt-HuggingFace-facebook-bart-large-cnn** model is selected because it specializes in text summarization, which is directly relevant to summarizing textual information. No other models in the provided list specifically handle table summarization in isolation. As such, given the constraints, this model is the only viable choice for fulfilling at least part of the user's request as accurately as possible using only one model. It is based on the paper [“BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension”](https://arxiv.org/pdf/1910.13461), which details its capabilities in text summary generation. The other models focus on image captioning or multimodal tasks, which do not align with the task of summarizing mixed text and tabular data without the ability to chain additional support models.",,,,"이런 경우에는 Txt2Txt-HuggingFace-facebook-bart-large-cnn 모델을 추천할게. 이 모델은 긴 문장을 읽고 핵심만 뽑아 간결하게 요약해주는 데 특화되어 있어서, 네가 보여주는 텍스트 내용을 효율적으로 정리해줄 수 있어. 표 형식의 데이터까지 다루는 건 어렵지만, 적어도 글로 된 설명 부분은 명확하고 깔끔하게 요약해주기 때문에 텍스트 중심의 정보를 빠르게 파악하려는 데는 충분히 도움이 될 거야."
+Semantic-SAM: Segment and Recognize Anything at Any Granularity,segmentation,"Could you please help me break down the objects in this photo and highlight them in detail?
+",이 사진에서 물체들을 세밀하게 나눠서 표시해 줄래?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to identify and annotate specific objects within a single image, providing a detailed breakdown of what is present.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+Design a high-level CNAPS workflow that uses a single object detection model to process the input image and generate a detailed breakdown of its contents.
+
+### A. High-Level Overview
+The user's photo is fed directly into the **ObjDet-HuggingFace-facebook-detr-resnet-50** model. This model, based on the DETR architecture, processes the image to detect and localize objects. It outputs a set of bounding boxes, each associated with a class label and a confidence score. The model's ability to handle complex scenes and provide accurate object localization makes it the most suitable choice for breaking down and highlighting objects in detail.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: User's photo]
+|
+v
+[ObjDet-HuggingFace-facebook-detr-resnet-50 (Object detection and localization)]
+|
+v
+[Final Output (Object detection results with bounding boxes, class labels, and confidence scores. Confidence: High)]
+
+### C. Justify Your Design
+The **ObjDet-HuggingFace-facebook-detr-resnet-50** model is the single most appropriate choice because it directly addresses the user's core request: object detection. The user wants to ""break down the objects"" and ""highlight them,"" which is exactly what a detection model is designed to do. It identifies objects and provides their locations (bounding boxes), which are essential for ""highlighting.""
+
+The other models, such as YOLOS variants, are also object detection models but are specialized for specific datasets (e.g., fashion items). Since the user did not specify a domain (e.g., clothing, animals, etc.), the DETR model is more general-purpose and thus the best fit. The paper for this model, [https://arxiv.org/pdf/2005.12872](https://arxiv.org/pdf/2005.12872), confirms its effectiveness in a wide range of object detection tasks, making it a reliable choice for this workflow.",,,,"이런 경우에는 `ObjDet-HuggingFace-facebook-detr-resnet-50` 모델을 추천할게. 이 모델은 DETR 기반으로 이미지를 입력받아 사진 속 객체를 찾아내고, 각 객체마다 경계 상자와 클래스 레이블, 신뢰도 점수를 함께 제공해. 사용자의 요청처럼 사진 속 모든 객체를 세밀하게 찾아내고 분류하는 작업에 딱 맞아. DETR의 복잡한 배경을 잘 처리하는 능력 덕분에, 다양한 물체가 섞여 있는 사진에서도 정확하게 객체를 찾을 수 있어. 따라서, 사진 속 있는 모든 물체를 자세히 파악하고 싶다면, 이 모델이 가장 적합해.",,,,"## 1. Core Task
+The user's intent is to analyze the objects within a photo and highlight them in detail. The task requires object detection and segmentation to identify and possibly provide details on each detected object in the image.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The selected model processes an image input to detect and identify various objects present in the scene. It provides bounding boxes around the objects, highlighting them and potentially providing labels or categorized details about each detected object. The output is a detailed visual breakdown of objects in the image.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Photo]
+|
+v
+[Model A: ObjDet-HuggingFace-facebook-detr-resnet-50 (object detection)]
+|
+v
+[Final Output: Detailed highlights of objects in photo + detection confidence scores]
+```
+
+### C. Justify Your Design
+The model **ObjDet-HuggingFace-facebook-detr-resnet-50** is an efficient object detection model based on the DEtection TRansformers (DETR) framework, which is designed specifically for identifying and highlighting objects in an image. According to the paper linked, DETR is capable of end-to-end object detection, making it ideal for fulfilling the user's request to break down and highlight image content in detail. It was chosen over other models because it is directly suited for general object detection tasks, as opposed to models that might be specialized in particular domains like fashion. Other models were not used because they either lack a primary focus on comprehensive object detection or are unavailable in the recommended model list. The citation for the model's effectiveness is the original DETR paper: https://arxiv.org/pdf/2005.12872.",,,,"이런 경우에는 ObjDet-HuggingFace-facebook-detr-resnet-50 모델을 추천할게. 이 모델은 사진 속에 있는 다양한 사물을 자동으로 인식하고, 각각의 위치를 박스로 표시하면서 무엇인지도 함께 알려주는 객체 탐지에 특화되어 있어. 그래서 너가 원하는 것처럼 이미지 속에 어떤 물체가 있는지 하나하나 분석하고 시각적으로 강조해서 보여주는 데 아주 잘 맞는 모델이야."
+Segment Everything Everywhere All at Once,segmentation,"Can you automatically isolate all objects in each frame in this video?
+",이 영상에서 프레임마다 모든 물체를 자동으로 분리해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to perform object segmentation on a video, isolating all objects in each frame.
+
+---
+# 2. CNAPS-style Workflow (Single-Model)
+## A. High-Level Overview
+The input video is processed frame-by-frame by the **ObjDet-HuggingFace-facebook-detr-resnet-50** model. For each frame, the model performs object detection and instance segmentation, outputting a binary mask for each detected object. The final output is a video where each frame contains a segmented version of the original, with objects isolated from the background.
+
+## B. Visual Flow Diagram (text-based blocks)
+[Input: Video to be processed]
+|
+v
+[ObjDet-HuggingFace-facebook-detr-resnet-50 (Object detection and instance segmentation)]
+|
+v
+[Final Output (Video with isolated object masks + confidence: High)]
+
+## C. Justify Your Design
+The **ObjDet-HuggingFace-facebook-detr-resnet-50** model is sufficient because its primary function is object detection and instance segmentation. This directly aligns with the user's goal of isolating objects in each frame.
+
+- The model's paper, ""DETR: End-to-End Object Detection with Transformers,"" confirms its capability for instance segmentation, which provides a pixel-level mask for each detected object (https://arxiv.org/pdf/2005.12872).
+- This single model can process an entire video by applying the same detection algorithm to every frame, producing the desired segmented output.
+- Other models like segmentation networks are unsuitable because they are designed for image-to-image tasks (segmentation of a single image), not video processing.",,,,"이런 경우에는 **ObjDet-HuggingFace-facebook-detr-resnet-50** 모델을 추천할게. 이 모델은 비디오의 각 프레임을 하나씩 분석해, 영상 속 모든 물체를 탐지하고 세분화하는 기능을 제공해. 이 모델을 사용하면, 비디오의 각 프레임에서 물체가 어디에 있는지, 어떤 물체인지 정확하게 알아낼 수 있어. 그래서, 너가 원하는 것처럼 영상 속 모든 물체를 격리하고 배경에서 분리하는 작업을 아주 잘 처리할 수 있어.",,,,"## 1. Core Task
+The user's intent is to automatically isolate all objects in each frame of a video. The primary sub-goal is to perform object isolation (or segmentation) for each frame individually.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task is to identify and isolate objects in each frame of a video. Given that video processing isn't directly achievable with the models provided, the closest task we can perform is image segmentation on individual frames. We can utilize the ""Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512"" model to perform semantic segmentation on each frame, which will identify and segment various objects. You would need to extract frames from the video externally, as this process is not directly covered by the model's capabilities.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Single Frame from Video]
+|
+v
+[Model Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512 (Image Segmentation)]
+|
+v
+[Final Output: Segmented Objects in Frame (confidence)]
+```
+
+### C. Justify Your Design
+The ""Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512"" model is chosen because it is capable of performing semantic segmentation on images. This model directly addresses the user's need to isolate objects within a frame. While the task requires processing video frames sequentially, which involves tasks outside the scope of the model (e.g., video-to-frame extraction), the model itself is suitable for segmentation tasks. The model's performance is optimized for a broad range of objects, as indicated by its fine-tuning on the ADE20K dataset. No other models are used because they either address different tasks or their purpose doesn't fit the core requirement of object isolation in images.",,,,"이런 경우에는 Segmentation-HuggingFace-nvidia-segformer-b3-finetuned-ade-512-512 모델을 추천할게. 이 모델은 이미지에서 사람이나 사물 같은 객체들을 픽셀 단위로 구분해서 잘라주는 이미지 분할 작업에 특화되어 있어. 영상은 프레임 단위로 쪼갠 다음에 이 모델을 적용하면, 각 장면 속의 객체들을 자동으로 분리해낼 수 있어서 원하는 프레임별 객체 분리 작업에 잘 맞을 거야."
+SAM 2: Segment Anything in Images and Videos,segmentation,"Can you keep tracking and isolating only the moving people in the video?
+",영상 속에서 움직이는 사람만 계속 추적해서 분리해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to identify and isolate moving people in a video. This is a video object detection task.
+
+- Sub-goals: Real-time object tracking, pose estimation, and segmentation of moving people.
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The input video is processed by the `PoseEstimation-OpenPose` model. The model analyzes each frame to detect and track human body keypoints, including joints like the head, shoulders, and knees. It identifies the moving person(s) based on the presence and motion of these keypoints. The final output is a video with the moving people's skeletons or heatmaps highlighted, along with a tracking ID for each detected person.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: Video of a scene with moving people]
+|
+v
+[PoseEstimation-OpenPose (Detects and tracks human body keypoints in each frame)]
+|
+v
+[Final Output (Video with moving people's skeletons/tracking IDs, high confidence)]
+```
+
+### C. Justify Your Design
+The `PoseEstimation-OpenPose` model is sufficient because the user's core request is to ""track and isolate"" moving people. While the user's exact wording is ""tracking and isolating,"" the model's primary function is to detect and track human body poses in video frames, which inherently includes identifying and following moving individuals. By highlighting the detected keypoints, the model effectively isolates the moving people from the background. No other models are necessary as this single task can be accomplished by a specialized pose estimation model. The model's purpose directly aligns with the user's goal, making it the most appropriate choice. Cite: https://arxiv.org/pdf/1812.08008",,,,"이런 경우에는 `PoseEstimation-OpenPose` 모델을 추천할게. 이 모델은 비디오의 각 프레임을 분석해 사람의 몸 관절(예: 머리, 어깨, 무릎)을 감지하고 추적하는 기능이 있어. 사용자가 움직이는 사람을 찾아내고 식별하려는 작업에 딱 맞아. 모델은 이 움직이는 사람의 스플라이너(바디 뼈대)나 히트맵을 강조해줘서, 실시간으로 추적하고, 여러 프레임에서 동일한 사람을 구분하는 데 큰 도움을 줄 거야.",,,,"## 1. Core Task
+The user's intent is to track and isolate only the moving people within a video. Sub-goals may include detecting individuals and distinguishing their movements over time.
+
+---
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The input video would be processed to detect human body keypoints frame-by-frame using the PoseEstimation-OpenPose model. This model identifies people and their movements by estimating their poses in each frame of the video. Although this model does not track objects across multiple frames, it can provide the necessary data to identify which people are moving in each frame based on their changing positions.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Video with moving people]
+|
+v
+[PoseEstimation-OpenPose (pose detection)]
+|
+v
+[Final Output (pose data with detected people + confidence)]
+```
+
+### C. Justify Your Design
+PoseEstimation-OpenPose is sufficient for detecting and isolating moving people frame-by-frame by estimating body keypoints, which can show movement through changing key positions across frames. This is the closest single-model solution provided, as it directly engages with detecting and analyzing human figures, giving a foundational result for identifying movement. While this does not fulfill the user's full requirement of tracking over time, no other provided models can extract temporal information nor isolate moving individuals in the video.
+
+Reference: Cao, Z., Hidalgo, G., Simon, T., Wei, S.-E., & Sheikh, Y. (2019). OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields. arXiv preprint arXiv:1812.08008.",,,,"이런 경우에는 PoseEstimation-OpenPose 모델을 추천할게. 이 모델은 사람의 관절 위치를 프레임마다 분석해줘서, 각 인물이 어떻게 움직이는지를 시각적으로 파악할 수 있어. 특히 같은 인물이라도 정지해 있으면 관절 위치 변화가 없고, 움직이는 사람은 프레임마다 자세가 달라지기 때문에, 이를 기준으로 실제로 움직이는 사람만 추려낼 수 있어. 그래서 영상 속에서 움직이는 사람들만 따로 식별하고 추적하려는 너의 목적에 잘 맞아."
+Grounding DINO,Zero-Shot Object Detection,"Can you display the object described in text within an image?
+",텍스트로 설명한 물체를 이미지 안에서 표시해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to generate a new image that contains a specific object described in text.
+
+- Sub-goal: Image generation based on text description.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+Design a high-level CNAPS workflow that uses exactly one model to fulfill the task.
+
+### A. High-Level Overview
+The workflow takes a text description of the object as input. This text is processed by the **Txt2Img-StableDiffusionV1-1** model, which interprets the description and generates a corresponding image that includes the described object. The final output is a new image that visually represents the object as described.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Text description of the object]
+|
+v
+[Model: Txt2Img-StableDiffusionV1-1 (Generates an image from a text prompt)]
+|
+v
+[Final Output: Image containing the described object (High confidence)]
+
+### C. Justify Your Design
+The **Txt2Img-StableDiffusionV1-1** model is the most appropriate choice because its core function is to generate images from text prompts. The user's goal is precisely to ""display the object described in text within an image,"" which is the exact capability of this model.
+
+No other models were used because:
+- The task is a direct application of the model's primary function.
+- Using a text-to-image model is the only way to achieve the user's goal within the constraints of a single-model workflow.
+- The other models (Txt2Img-StableDiffusionV1-ICBINP and Txt2Img-StableDiffusionV1-AbsoluteReality) are specialized variants of the same base model and are equally capable for this task.
+
+Cite the model’s paper or GitHub/ArXiv reference.
+- **Model:** Txt2Img-StableDiffusionV1-1
+- **Reference:** Paper: None",,,,"이런 경우에는 **Txt2Img-StableDiffusionV1-1** 모델을 추천할게. 이 모델은 텍스트 설명을 받아서 그 설명에 맞는 이미지를 생성해주는 기능이 있어. 예를 들어, ""그리피스와 함께 놀고 있는 강아지""라고 입력하면, 강아지와 그리피스가 함께 있는 새로운 이미지를 만들어줄 거야. 사용자가 원하는 특정 물체를 시각적으로 표현하려는 작업에 딱 맞아. 모델은 텍스트를 이해하고, 그에 맞는 이미지를 생성하는 데 뛰어나서, 정말 재미있는 결과물을 만들 수 있을 거야.",,,,"## 1. Core Task
+The user's intent is to generate an image that contains an object described by a provided text description.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task is to take a textual description as input and use a text-to-image model to generate an image that visually represents the object described. The chosen model will process the text to understand the content and characteristics of the object described and produce an image that captures these details.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: text description of an object]
+|
+v
+[Txt2Img-StableDiffusionV1-1 (generates image from text)]
+|
+v
+[Final Output: Image of the described object]
+```
+
+### C. Justify Your Design
+The ""Txt2Img-StableDiffusionV1-1"" model is specifically designed to convert text descriptions into corresponding images. It processes the input text to generate a visual representation that aligns with the description provided, fulfilling the user's request to ""display the object described in text within an image."" This single model approach is sufficient, as it directly takes the text input and outputs an image, making it the most appropriate choice for the task. Other models were not considered since this model directly addresses the user's requirement without needing additional processing or functionality.
+
+Note: There is no additional paper or citation provided for the specific models in the list, as they are standalone without referenced papers.",,,,"이런 경우에는 Txt2Img-StableDiffusionV1-1 모델을 추천할게. 이 모델은 네가 입력한 텍스트를 바탕으로 그 내용을 시각적으로 표현해주는 이미지 생성 기능에 특화되어 있어. 예를 들어, 특정 물체를 글로 묘사하면 그걸 이미지로 만들어주는 방식이라서, 원하는 물체가 어떤 모습일지 상상한 장면을 그대로 시각화하는 데 아주 잘 맞아."
+One-Stage 3D Whole-Body Mesh Recovery with Component Aware Transformer,3D Reconstruction,"Can you reconstruct this person's photo into a 3D body model of the object described in text? Can you show it in the image?
+",사람 사진을 3D 몸체 모델로 복원해 줄 수 있어?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"#
+## 1. Core Task
+The user wants to reconstruct a 2D photo of a person into a 3D model and render it back into a 2D image based on a textual description. The sub-goals are: 3D reconstruction from a 2D photo and 3D rendering from text.
+
+---
+## 2. CNAPS-style Workflow (Single-Model)
+The user's request cannot be fulfilled using the provided models.
+
+### A. High-Level Overview
+This request involves two distinct and incompatible tasks: 3D reconstruction and 2D rendering. The provided models do not cover either task. The `PoseEstimation-OpenPose` model analyzes 2D photos to detect 2D keypoints, not to create 3D models. The `Txt2Img-StableDiffusionV1` models generate new images from text but do not accept a photo as input or perform 3D reconstruction. Therefore, none of the models can complete the user's request.
+
+### B. Visual Flow Diagram (text-based blocks)
+[Input: Person's photo and text description]
+|
+v
+[not available (no suitable model)]
+|
+v
+[Final Output (goal + confidence)]
+- **Goal:** 3D body model reconstruction and 2D rendering from text.
+- **Confidence:** 0% (non-achievable case)
+
+### C. Justify Your Design
+This request is non-achievable with the provided models. The user's goal requires both 3D reconstruction and 3D rendering, which are not supported by any of the available tools. The `PoseEstimation-OpenPose` model only processes 2D photos to find keypoints, which is insufficient for 3D reconstruction. The `Txt2Img-StableDiffusionV1` models are text-to-image generators that cannot take a photo as input or handle 3D data. Since the user's goal requires capabilities beyond the scope of these models, and chaining models is not allowed, the task cannot be accomplished. The Hard Rule applies, and the correct response is ""not available.""",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to reconstruct a person's photo into a 3D body model of an object described in text and show it as an image. The sub-goals include combining 3D modeling from a photo with text-based transformation of the object.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The task requires transforming a photograph into a 3D model representation based on textual description, and then visualizing it in an image. Unfortunately, none of the provided models — focused on image pose estimation or text-to-image generation — can independently achieve this multistage transformation task that requires synthesizing 3D data and visualizing it from text descriptions.
+
+### B. Visual Flow Diagram (text-based blocks)
+```
+[Input: photo + textual description]
+|
+v
+[Model: N/A]
+|
+v
+[Final Output: not available]
+```
+
+### C. Justify Your Design
+None of the recommended models can achieve the user's task, as it involves reconstructing a 3D model from a 2D image and integrating textual descriptions to visualize it, which requires capabilities beyond the individual scope of 'PoseEstimation-OpenPose' (which focuses on human pose estimation) or 'Txt2Img' models (which generate 2D images from text). There's no available model that singly supports the complete 3D reconstruction and rendering with text input as desired by the user. Thus, the response is: not available.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
+VoxelNeXt: Fully Sparse VoxelNet for 3D Object Detection and Tracking,3D detection & tracking,"Can you analyze the road environment in 3D object units?
+",도로 환경을 3D 객체 단위로 분석해 줄 수 있니?,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,"# 1. Core Task
+The user wants to extract and represent 3D information about objects in a road environment.
+
+Sub-goals:
+*   Road environment analysis
+*   3D object recognition
+*   3D representation
+
+# 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The user's request cannot be fulfilled by any of the provided models. The task requires 3D object recognition and representation, which is fundamentally different from the capabilities of the available models. The only model, SISR-CARN-M-3x, is designed for Single Image Super-Resolution (SISR) and cannot perform 3D analysis. Therefore, the user's goal is not achievable with the given resources.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+[Input: Image of a road environment]
+|
+v
+[not available (no suitable model found)]
+|
+v
+[Final Output (3D object analysis - not available)]
+
+### C. Justify Your Design
+The user's request to ""analyze the road environment in 3D object units"" is a complex computer vision task that requires 3D perception capabilities. The provided models are limited to specific, 2D-based tasks:
+
+*   **SISR-CARN-M-3x** is a Single Image Super-Resolution model. Its purpose is to enhance the resolution of a single 2D image. It does not process, analyze, or represent 3D data. It is functionally incapable of performing the required 3D object analysis.
+
+*   **Segmentation-DeepLabV3Plus-ResNet101-VOC** is a 2D semantic segmentation model. It can identify and classify objects within a 2D image but does not provide any 3D information about those objects' spatial relationships or geometry.
+
+*   **Txt2Img-StableDiffusionV1-henmixReal** is a text-to-image generative model. It creates images from text descriptions but does not analyze or represent 3D data from existing images.
+
+Since none of these models can process or analyze 3D data, the user's goal is non-achievable with the provided models. Therefore, the response is ""not available"" in accordance with the Hard Rule.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. ,,,,"## 1. Core Task
+The user's intent is to analyze the road environment in 3D object units, potentially identifying and describing objects in a 3D space on or around the road.
+
+## 2. CNAPS-style Workflow (Single-Model)
+
+### A. High-Level Overview
+The selected model processes an input image of a road environment to segment and identify various objects typically found within such a setting, like cars, pedestrians, or road signs. The model outputs a segmented representation of the image, assigning a class label to each pixel, which can then be used for further analysis related to object identification. However, the model operates in 2D segmentation mode and does not provide direct 3D object unit analysis.
+
+### B. Visual Flow Diagram (text-based blocks)
+
+```
+[Input: Road environment image]
+|
+v
+[Segmentation-DeepLabV3Plus-ResNet101-VOC (image segmentation)]
+|
+v
+[Final Output (2D segment classification with high confidence)]
+```
+
+### C. Justify Your Design
+The selected model, Segmentation-DeepLabV3Plus-ResNet101-VOC, specializes in semantic image segmentation, which is the most relevant to understanding the components of a road scene in 2D. Although it doesn't provide 3D object units as requested, it segments the scene into meaningful classes such as vehicles, pedestrians, and signs. No other provided models fit closer to the user's request. The model is sufficient for creating a foundational segmentation map that might visually mimic object analysis but does not translate to 3D. Given no models offer direct 3D object analysis, this segmentation model is the closest fit to the request.
+
+Reference for the selected model's functionality: This model is a state-of-the-art segmentation method, although a paper reference wasn't provided.",,,,우리가 가지고 있는 모델에서는 너의 요청을 해결해줄 수 없어. 
