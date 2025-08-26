@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
-
+st.cache_data.clear()
 # =========================
 # 기본 설정
 # =========================
