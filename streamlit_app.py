@@ -6,16 +6,16 @@ st.set_page_config(page_title="LLM Answer Viewer", layout="wide")
 
 st.title("📄 LLM 응답 비교 Viewer")
 
-# 📁 업로드 또는 GitHub 연동된 .xlsx 경로 지정
-EXCEL_PATH = "RAG_final_v1_extracted_with_query_GT_qwen.xlsx"  # 또는 GitHub raw URL
+# 📁 CSV 파일 경로 설정
+CSV_PATH = "RAG_final_v1_extracted_with_query_GT_qwen.csv"  # CSV 파일명으로 변경
 
 # 📥 데이터 로드
 @st.cache_data
 def load_data(path):
-    return pd.read_excel(path)
+    return pd.read_csv(path)  # ← 여기만 수정됨
 
 try:
-    df = load_data(EXCEL_PATH)
+    df = load_data(CSV_PATH)
 except Exception as e:
     st.error(f"❌ 파일을 불러올 수 없습니다: {e}")
     st.stop()
