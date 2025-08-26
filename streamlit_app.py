@@ -97,4 +97,58 @@ with tab_out:
     elif scope == "GT만":
         f = df["_out_gt"]
     elif scope == "Qwen만":
-        f = df["_out_qwen"] & ~df["_out_gt"] & ~df["_o_]()
+        f = df["_out_qwen"] & ~df["_out_gt"] & ~df["_out_gpt4o"]
+    else:  # GPT-4o만
+        f = df["_out_gpt4o"] & ~df["_out_gt"] & ~df["_out_qwen"]
+
+    filtered = df.loc[f, required_cols].copy()
+
+    # 검색(질문/모델명)
+    with st.expander("🔎 검색/정렬 옵션", expanded=True):
+        kw = st.text_input("키워드(질문/모델명에서 검색):", "")
+        sort_col = st.selectbox("정렬 컬럼 선택", required_cols, index=1)
+        ascending = st.checkbox("오름차순 정렬", value=True)
+
+    if kw:
+        mask = (
+            df["Query_korea"].astype(str).str.contains(kw, case=False, na=False) |
+            df["Model Unique Name"].astype(str).str.contains(kw, case=False, na=False)
+        )
+        filtered = filtered[mask]
+
+    if not filtered.empty:
+        filtered = filtered.sort_values(by=sort_col, ascending=ascending)
+
+    st.markdown(f"#### 결과 ({len(filtered)}건)")
+    st.dataframe(filtered, use_container_width=True, height=420)
+
+    # 상세 보기
+    st.markdown("### 🔍 상세 보기")
+    if len(filtered) > 0:
+        pick = st.selectbox("상세 확인할 질문을 선택하세요:", filtered["Query_korea"].tolist())
+        detail = df[df["Query_korea"] == pick].iloc[0]
+
+        st.markdown(f"**Model**: {detail['Model Unique Name']}")
+        st.info(detail["Query_korea"])
+
+        cc1, cc2, cc3 = st.columns(3)
+        with cc1:
+            st.markdown("**GT**")
+            st.warning(detail["GT"])
+        with cc2:
+            st.markdown("**Qwen3 Answer**")
+            st.warning(detail["qwen3 Answer"])
+        with cc3:
+            st.markdown("**GPT-4o Answer**")
+            st.warning(detail["gpt4o Answer"])
+    else:
+        st.info("조건에 맞는 결과가 없습니다.")
+
+    # 다운로드
+    st.download_button(
+        "⬇️ 현재 필터 결과 CSV 다운로드",
+        data=filtered.to_csv(index=False).encode("utf-8-sig"),
+        file_name="out_of_model_filtered.csv",
+        mime="text/csv",
+        use_container_width=True
+    )
