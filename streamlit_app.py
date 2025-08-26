@@ -7,7 +7,7 @@ st.set_page_config(page_title="LLM Answer Viewer", layout="wide")
 st.title("📄 LLM 응답 비교 Viewer")
 
 # 📁 CSV 파일 경로 설정
-CSV_PATH = "RAG_final_v1_extracted_with_query_GT_qwen.csv"  # CSV 파일명으로 변경
+CSV_PATH = "RAG_final_v1_extracted_with_query_GT_qwen - RAG_final_v1_extracted_with_query.csv"  # CSV 파일명으로 변경
 
 # 📥 데이터 로드
 @st.cache_data
