@@ -1,227 +1,43 @@
 import streamlit as st
-import os
-import json
-import re
-from pathlib import Path
+import pandas as pd
 
-# 🔧 사용자 정의: JSON 폴더 경로
-DATA_PATH = Path("results")
+# 📌 기본 설정
+st.set_page_config(page_title="LLM Answer Viewer", layout="wide")
 
-# 🔁 모델 키 → 이름 매핑
-MODEL_MAP = {
-    "llm_a": "claude_sonnet4",
-    "llm_b": "chatgpt4o",
-    "llm_c": "gemini_pro"
-}
+st.title("📄 LLM 응답 비교 Viewer")
 
-# 📐 페이지 설정
-st.set_page_config(layout="wide", page_title="AgentAI Viewer", page_icon="🧠")
+# 📁 업로드 또는 GitHub 연동된 .xlsx 경로 지정
+EXCEL_PATH = "RAG_final_v1_extracted_with_query_GT_qwen.xlsx"  # 또는 GitHub raw URL
 
-# ✅ 📁 페이지 선택 추가
-st.sidebar.markdown("### 📁 페이지 선택")
-page = st.sidebar.radio("페이지를 선택하세요", [
-    "응답 비교 보기",
-    "향후 피드백 방향성",
-    "예측 결과 비교",
-    "prompt_regenerated 비교"
-])
+# 📥 데이터 로드
+@st.cache_data
+def load_data(path):
+    return pd.read_excel(path)
 
-# ───────────────────────────────────────────────────────────
-# ✅ 1. 응답 비교 보기ㄴㄴㄴ
-# ───────────────────────────────────────────────────────────
-if page == "응답 비교 보기":
-    json_files = sorted(DATA_PATH.glob("*.json"))
-    query_map = {f.stem: f for f in json_files}
+try:
+    df = load_data(EXCEL_PATH)
+except Exception as e:
+    st.error(f"❌ 파일을 불러올 수 없습니다: {e}")
+    st.stop()
 
-    st.sidebar.title("🔍 Query Navigation")
-    selected_query = st.sidebar.selectbox("Select Query", list(query_map.keys()))
+# 🔍 질문 선택
+query_list = df["query"].tolist()
+selected_query = st.selectbox("🔍 비교할 질문을 선택하세요:", query_list)
 
-    with st.sidebar.expander("📋 평가 기준 보기"):
-        st.markdown("""
-**🧪 평가 기준 (각 항목당 10점 만점)**
+# 🔄 선택된 행 가져오기
+row = df[df["query"] == selected_query].iloc[0]
 
-| 번호 | 항목 | 설명 |
-|------|------|------|
-| 1 | 명확성 및 가독성 | 설명이 명확하고 구조적으로 잘 정리되었는가? |
-| 2 | 정확성 및 완전성 | 요구된 모든 항목이 빠짐없이 포함되었는가? |
-| 3 | CNAPS 스타일 워크플로우 | 분기(branch), 병합(merge) 등 시냅스 구조가 반영되었는가? |
-| 4 | 제공 모델만 사용 | 문제에서 제시한 모델만을 사용했는가? |
-| 5 | 해석 가능성과 설득력 | 선택 모델의 근거와 설명이 설득력 있었는가? |
-""")
+# 📊 세 응답 비교
+st.markdown("### 🙋 사용자 질문")
+st.info(selected_query)
 
-    with open(query_map[selected_query], 'r') as f:
-        data = json.load(f)
-
-    query_text = data.get("query_text", "")
-    responses = data.get("responses", {})
-    votes = data.get("votes", {})
-    majority = data.get("majority_vote", "")
-
-    ask_match = re.search(r"A user asks:\n[\"“](.+?)[\"”]", query_text, re.DOTALL)
-    user_ask = ask_match.group(1).strip() if ask_match else "(사용자 질문을 찾을 수 없습니다.)"
-
-    model_block_match = re.search(r"### Recommended AI Models:\s*\n(.+)", query_text, re.DOTALL)
-    models_raw = model_block_match.group(1).strip() if model_block_match else "(모델 목록 없음)"
-    models_clean = re.findall(r"- \*\*(.*?)\*\*\n\s*Paper: (.*)", models_raw)
-    models_md = "\n".join([f"- **{name}**\n  Paper: {link}" for name, link in models_clean]) if models_clean else models_raw
-
-    st.markdown("## 🙋 사용자 질문")
-    st.info(f"**\"{user_ask}\"**")
-
-    st.markdown("## 🧠 추천된 AI 모델 목록")
-    st.code(models_md, language="markdown")
-
-    st.markdown("## 🤖 Model Responses")
-    for raw_key in ["llm_a", "llm_b", "llm_c"]:
-        response = responses.get(raw_key, "(No response found)")
-        mapped_name = MODEL_MAP.get(raw_key, raw_key)
-        voted_by = [model for model, v in votes.items() if v == raw_key]
-        majority_flag = "🌟 **Majority Vote**" if raw_key == majority else ""
-
-        with st.expander(f"🧠 {mapped_name}", expanded=True):
-            st.markdown(response, unsafe_allow_html=True)
-            st.markdown(f"✅ **Voted by**: {', '.join(voted_by) if voted_by else 'None'}")
-            if majority_flag:
-                st.markdown(majority_flag)
-
-# ───────────────────────────────────────────────────────────
-# ✅ 2. 향후 피드백 방향성
-# ───────────────────────────────────────────────────────────
-elif page == "향후 피드백 방향성":
-    st.title("📈 향후 피드백 방향성: RAG 성능 향상 중심 전략")
-
-    st.markdown("""
----
-
-## 🎯 목표 재정의
-
-기존에는 출력 양식의 구조화와 CNAPS 스타일 응답 일관성에 초점을 맞췄다면,  
-**향후에는 Retrieval-Augmented Generation (RAG) 성능 향상 자체를 핵심 목표로 전환**합니다.
-
----
-
-## 🧠 핵심 전략
-
-- 단순히 양식을 잘 맞추는 것에 그치지 않고,  
-  **정확하고 정보 기반의 응답을 생성할 수 있는 retrieval-aware fine-tuning** 또는  
-  **강건한 multi-hop retrieval chain 학습 구조**로 발전
-
----
-
-## 📘 참고 사례 (성능 중심 RAG 연구)
-
-- [CoRAG (Chain-of-Retrieval)](https://arxiv.org/pdf/2501.14342): step-by-step 검색 흐름을 생성하며 응답 품질 극대화
-- RbFT: retrieval 오류에 강건한 fine-tuning 구조
-- Invar-RAG / OpenRAG: retriever와 generator를 end-to-end로 동시 최적화
-- IterKey: sparse retrieval에서도 iterative 방식으로 성능 보강
-
----
-
-## ✅ 요약
-
-앞으로는 **LLM이 단순 생성자가 아니라, 능동적 검색 행위자로 작동할 수 있도록**  
-retrieval을 포함한 학습 구조와 평가 방식을 강화하는 방향으로 피드백과 개선을 이어갈 예정입니다.
-""")
-
-# ───────────────────────────────────────────────────────────
-# ✅ 3. 예측 결과 비교 (인덱스 기반)
-# ───────────────────────────────────────────────────────────
-elif page == "예측 결과 비교":
-    st.title("📊 LLM 예측 결과 vs 정답 비교")
-
-    pred_file_path = "results/generated_predictions_extracted.json"
-
-    if os.path.exists(pred_file_path):
-        with open(pred_file_path, "r", encoding="utf-8") as f:
-            prediction_data = json.load(f)
-
-        st.sidebar.markdown("### 🔢 항목 선택")
-        example_idx = st.sidebar.number_input("인덱스 선택", min_value=0, max_value=len(prediction_data)-1, value=0, step=1)
-        example = prediction_data[example_idx]
-
-        st.markdown("## 🙋 Prompt (User Input)")
-        st.code(example["prompt"], language="markdown")
-
-        st.markdown("## 🤖 Predict (LLM Output)")
-        st.success(example["predict"])
-
-        st.markdown("## ✅ Label (Ground Truth)")
-        st.info(example["label"])
-    else:
-        st.warning("📁 results/generated_predictions_extracted.json 파일이 존재하지 않습니다.")
-
-
-# ───────────────────────────────────────────────────────────
-# ✅ 4. Prompt Regenerated 비교
-# ───────────────────────────────────────────────────────────
-elif page == "prompt_regenerated 비교":
-    st.title("📝 Query1: Prompt (vanilla vs regenerated) 비교")
-
-    # JSON 경로
-    prompt_json_path = Path("results/prompt_comparsion.json")
-    if not prompt_json_path.exists():
-        st.warning("📁 results/merged_query1.json 파일이 존재하지 않습니다.")
-    else:
-        with open(prompt_json_path, "r", encoding="utf-8") as f:
-            prompt_data = json.load(f)
-
-        # 모델 선택
-        st.sidebar.markdown("### 🧠 모델 선택")
-        model_names = sorted(prompt_data.keys())
-        selected_model = st.sidebar.selectbox("모델을 선택하세요", model_names)
-
-        # 해당 모델의 vanilla / regenerated 쿼리
-        vanilla_query = prompt_data[selected_model].get("vanilla", "(vanilla 쿼리 없음)")
-        regenerated_query = prompt_data[selected_model].get("regenerated", "(regenerated 쿼리 없음)")
-
-        st.markdown(f"### 📌 선택한 모델: `{selected_model}`")
-
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown("#### 🧾 Vanilla Prompt")
-            st.code(vanilla_query, language="markdown")
-        with col2:
-            st.markdown("#### ✨ Regenerated Prompt")
-            st.code(regenerated_query, language="markdown")
-
-# ✅ 5. 모델별 GT vs Prediction 보기
-elif page == "모델 예측 결과 비교":
-    st.title("📂 모델별 GT vs 예측 결과 비교")
-
-    base_path = Path("results/eval_v1")
-    if not base_path.exists():
-        st.warning("`results/eval_v1/` 경로가 존재하지 않습니다. GitHub에 업로드한 후 다시 시도해 주세요.")
-    else:
-        # 모델 폴더들 탐색
-        model_dirs = sorted([p for p in base_path.iterdir() if p.is_dir()])
-        model_names = [p.name for p in model_dirs]
-
-        selected_model = st.sidebar.selectbox("🔍 모델을 선택하세요", model_names)
-        model_path = base_path / selected_model
-
-        # 파일 경로 설정
-        gt_path = model_path / "eval" / "gpt4o.txt"
-        ours_pred_path = model_path / "eval_ours" / "qwen3.txt"
-        gpt4o_pred_path = model_path / "eval_ours" / "gpt4o.txt"
-
-        # 각 파일 읽기 함수
-        def read_file_safe(path):
-            if path.exists():
-                with open(path, "r", encoding="utf-8") as f:
-                    return f.read()
-            else:
-                return "(파일이 존재하지 않습니다)"
-
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
-            st.markdown("### ✅ Ground Truth (gpt4o, eval)")
-            st.code(read_file_safe(gt_path), language="markdown")
-
-        with col2:
-            st.markdown("### 🤖 Our Prediction (qwen3, eval_ours)")
-            st.code(read_file_safe(ours_pred_path), language="markdown")
-
-        with col3:
-            st.markdown("### 🤖 GPT-4o Prediction (eval_ours)")
-            st.code(read_file_safe(gpt4o_pred_path), language="markdown")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown("#### 🤖 Qwen Answer")
+    st.success(row["Qwen Answer"])
+with col2:
+    st.markdown("#### 🤖 GPT-4o")
+    st.success(row["gpt4o"])
+with col3:
+    st.markdown("#### ✅ Ground Truth")
+    st.info(row["GT"])
