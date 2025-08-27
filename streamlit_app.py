@@ -90,15 +90,15 @@ with tab_out:
     # 안전하게 DataFrame 표시
     st.dataframe(df_out[preview_cols], use_container_width=True, height=420)
     
-        query_out_list = df_out["query_kor"].dropna().tolist()
-        selected_out = st.selectbox("🔍 Out-of-Model 질문 선택:", query_out_list)
-    
-        matched_o = df_out[df_out["query_kor"] == selected_out]
-        if not matched_o.empty:
-            row_o = matched_o.iloc[0]
+    query_out_list = df_out["query_kor"].dropna().tolist()
+    selected_out = st.selectbox("🔍 Out-of-Model 질문 선택:", query_out_list)
 
-        st.markdown(f"**Model**: {row_o['Model Unique Name']} | **Category**: {row_o['Category']}")
-        st.info(row_o["query_kor"])
+    matched_o = df_out[df_out["query_kor"] == selected_out]
+    if not matched_o.empty:
+        row_o = matched_o.iloc[0]
+
+    st.markdown(f"**Model**: {row_o['Model Unique Name']} | **Category**: {row_o['Category']}")
+    st.info(row_o["query_kor"])
 
         c1, c2, c3 = st.columns(3)
         with c1:
