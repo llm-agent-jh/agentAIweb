@@ -12,7 +12,7 @@ st.title("📄 LLM 응답 비교 Viewer")
 # 파일 경로
 # -------------------------
 BASE_DIR = "."  # 두 파일이 같은 경로에 있을 경우
-MAIN_FILE = os.path.join(BASE_DIR, "RAG_final_v1_extracted_with_query_GT_qwen - RAG_final_v1_extracted_with_query.csv")
+MAIN_FILE = os.path.join(BASE_DIR, "RAG_final_v1_extracted_with_query_GT_qwen.csv")
 OUT_FILE  = os.path.join(BASE_DIR, "RAG_outofmodel_only.csv")
 
 # =========================
