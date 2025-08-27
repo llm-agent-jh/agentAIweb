@@ -71,7 +71,7 @@ with tab_main:
             st.success(safe_get(row, "Qwen Answer"))
         with c2:
             st.markdown("#### 🤖 GPT-4o Answer")
-            st.success(safe_get(row, "gpt4o Answer"))
+            st.success(safe_get(row, "gpt4o"))
         with c3:
             st.markdown("#### ✅ Ground Truth")
             st.info(safe_get(row, "GT"))
