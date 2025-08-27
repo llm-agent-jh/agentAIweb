@@ -84,29 +84,18 @@ with tab_main:
 with tab_out:
     st.markdown("### 🚫 Out-of-Model 전용 뷰")
 
-    # ✔️ 미리보기 컬럼 (우선 모든 가능성 포함)
-    preview_cols = ["Model Unique Name", "Category", "Query_korea", "query_kor", "Qwen Answer", "qwen3 Answer", "gpt4o Answer", "GT"]
+    # 정확한 컬럼만 사용
+    preview_cols = ["Model Unique Name", "Category", "Query_korea", "qwen3 Answer", "gpt4o Answer", "GT"]
     
-    # ✔️ 존재하는 컬럼만 필터링
-    available_cols = [col for col in preview_cols if col in df_out.columns]
+    # 안전하게 DataFrame 표시
+    st.dataframe(df_out[preview_cols], use_container_width=True, height=420)
     
-    # ✔️ 디버깅용: 실제 존재하는 컬럼명 확인
-    st.write("✅ 실제 df_out 컬럼명:", df_out.columns.tolist())
-    st.write("✅ 사용 가능한 컬럼명:", available_cols)
+        query_out_list = df_out["query_kor"].dropna().tolist()
+        selected_out = st.selectbox("🔍 Out-of-Model 질문 선택:", query_out_list)
     
-    # ✔️ 안전하게 dataframe 표시
-    if available_cols:
-        st.dataframe(df_out[available_cols], use_container_width=True, height=420)
-    else:
-        st.warning("표시할 컬럼이 없습니다. CSV 컬럼명을 다시 확인하세요.")
-        st.dataframe(df_out[preview_cols], use_container_width=True, height=420)
-
-    query_out_list = df_out["query_kor"].dropna().tolist()
-    selected_out = st.selectbox("🔍 Out-of-Model 질문 선택:", query_out_list)
-
-    matched_o = df_out[df_out["query_kor"] == selected_out]
-    if not matched_o.empty:
-        row_o = matched_o.iloc[0]
+        matched_o = df_out[df_out["query_kor"] == selected_out]
+        if not matched_o.empty:
+            row_o = matched_o.iloc[0]
 
         st.markdown(f"**Model**: {row_o['Model Unique Name']} | **Category**: {row_o['Category']}")
         st.info(row_o["query_kor"])
