@@ -84,7 +84,7 @@ with tab_main:
 with tab_out:
     st.markdown("### 🚫 Out-of-Model 전용 뷰")
 
-    preview_cols = ["Model Unique Name", "Category", "query_kor", "Qwen Answer", "gpt4o Answer", "GT"]
+    preview_cols = ["Model Unique Name", "Category", "Query_korea", "Qwen Answer", "gpt4o Answer", "GT"]
     st.dataframe(df_out[preview_cols], use_container_width=True, height=420)
 
     query_out_list = df_out["query_kor"].dropna().tolist()
