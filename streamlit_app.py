@@ -1,4 +1,3 @@
-# app_viewer_llm_fullanswer_dual.py
 import streamlit as st
 import pandas as pd
 
@@ -13,6 +12,7 @@ st.title("📄 LLM FullAnswer vs Ground Truth")
 # =========================
 INMODEL_CSV  = "GT_with_rag_eval_with_all_models.csv"
 OUTMODEL_CSV = "rag_eval_with_all_models_out_of_model.csv"
+SUMMARY_CSV  = "llm_summary_metrics.csv"  # 👈 성능 요약표 CSV
 
 # =========================
 # 유틸
@@ -35,7 +35,6 @@ REQUIRED = [
 NA_PATTERNS = {"not available", "n/a", "na", "none", ""}
 
 def display_text(value) -> str:
-    """not available/빈 문자열을 한국어 안내문으로 치환"""
     if value is None:
         return "현재 우리모델에서는 해당 기능을 제공하지 않아"
     s = str(value).strip()
@@ -90,6 +89,7 @@ def render_block(label: str, df: pd.DataFrame):
 # =========================
 in_df  = load_csv(INMODEL_CSV)
 out_df = load_csv(OUTMODEL_CSV)
+summary_df = load_csv(SUMMARY_CSV)  # 👈 요약 메트릭
 
 check_required(in_df, "In-Model")
 check_required(out_df, "Out-of-Model")
@@ -97,10 +97,21 @@ check_required(out_df, "Out-of-Model")
 # =========================
 # 탭 렌더링
 # =========================
-tab_in, tab_out = st.tabs(["✅ In-Model", "🚫 Out-of-Model"])
-with tab_in:
+tab1, tab2, tab3 = st.tabs(["✅ In-Model", "🚫 Out-of-Model", "📊 Summary Metrics"])
+
+with tab1:
     render_block("In-Model", in_df)
-with tab_out:
+
+with tab2:
     render_block("Out-of-Model", out_df)
 
-st.caption("Tip: 상단 미리보기에서 전체를 훑고, 탭별 Folder를 선택해 GT와 각 LLM의 FullAnswer를 비교하세요.")
+with tab3:
+    st.subheader("📊 LLM 전체 성능 요약")
+    st.markdown("각 LLM별 성능 요약 메트릭을 비교해보세요.")
+
+    # 지표 시각화 표
+    display_df = summary_df.copy()
+    display_df.columns = display_df.columns.str.replace("_", " ").str.title()
+    st.dataframe(display_df, use_container_width=True, height=400)
+
+    st.caption("⬆️ Top@3 RAG, Top@1 Accuracy, Cosine Similarity, ROUGE1/2/L 등의 주요 지표입니다.")
