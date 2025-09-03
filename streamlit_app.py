@@ -12,7 +12,8 @@ st.title("📄 LLM FullAnswer vs Ground Truth")
 # =========================
 INMODEL_CSV  = "GT_with_rag_eval_with_all_models.csv"
 OUTMODEL_CSV = "rag_eval_with_all_models_out_of_model.csv"
-SUMMARY_CSV  = "llm_summary_metrics.csv"  # 👈 성능 요약표 CSV
+SUMMARY_CSV  = "llm_summary_metrics.csv"
+TRAIN_CSV    = "train_dataset.csv"  # 👈 NEW 추가
 
 # =========================
 # 유틸
@@ -24,12 +25,8 @@ def load_csv(path: str) -> pd.DataFrame:
     return df
 
 REQUIRED = [
-    "Folder",
-    "GT_Text",
-    "chatgpt4o_FullAnswer",
-    "qwen3_FullAnswer",
-    "claude_FullAnswer",
-    "grok4_FullAnswer",
+    "Folder", "GT_Text", "chatgpt4o_FullAnswer",
+    "qwen3_FullAnswer", "claude_FullAnswer", "grok4_FullAnswer",
 ]
 
 NA_PATTERNS = {"not available", "n/a", "na", "none", ""}
@@ -87,17 +84,21 @@ def render_block(label: str, df: pd.DataFrame):
 # =========================
 # 데이터 로드 & 검증
 # =========================
-in_df  = load_csv(INMODEL_CSV)
-out_df = load_csv(OUTMODEL_CSV)
-summary_df = load_csv(SUMMARY_CSV)  # 👈 요약 메트릭
+in_df      = load_csv(INMODEL_CSV)
+out_df     = load_csv(OUTMODEL_CSV)
+summary_df = load_csv(SUMMARY_CSV)
+train_df   = load_csv(TRAIN_CSV)  # 👈 NEW 추가
 
 check_required(in_df, "In-Model")
 check_required(out_df, "Out-of-Model")
+check_required(train_df, "Train Dataset")  # 👈 NEW 추가
 
 # =========================
 # 탭 렌더링
 # =========================
-tab1, tab2, tab3 = st.tabs(["✅ In-Model", "🚫 Out-of-Model", "📊 Summary Metrics"])
+tab1, tab2, tab3, tab4 = st.tabs([
+    "✅ In-Model", "🚫 Out-of-Model", "📊 Summary Metrics", "📁 Train Dataset"
+])
 
 with tab1:
     render_block("In-Model", in_df)
@@ -109,11 +110,11 @@ with tab3:
     st.subheader("📊 LLM 전체 성능 요약")
     st.markdown("각 LLM별 성능 요약 메트릭을 비교해보세요.")
 
-    # 지표 시각화 표
-    display_df = summary_df.copy()
-    display_df = display_df.set_index("Model")  # 모델명을 인덱스로 설정
-
-    # 숫자 열만 대상으로 max 강조 스타일 적용
+    display_df = summary_df.copy().set_index("Model")
     styled = display_df.style.highlight_max(axis=0, color='red', props="font-weight:bold")
-
     st.dataframe(styled, use_container_width=True, height=400)
+
+with tab4:
+    st.subheader("📁 Train Dataset Viewer")
+    st.markdown("학습용으로 생성된 train_dataset.csv 파일 내용을 확인합니다.")
+    st.dataframe(train_df, use_container_width=True, height=600)
