@@ -81,6 +81,13 @@ def render_block(label: str, df: pd.DataFrame):
         st.markdown("#### 🤖 Grok4")
         st.info(display_text(row["grok4_FullAnswer"]))
 
+    c5, c6 = st.columns(2)
+    with c5:
+        st.markdown("#### 🤖 Gemini Flash")
+        st.info(display_text(row.get("gemini_flash_FullAnswer", "")))
+    with c6:
+        st.markdown("#### 🤖 Gemini Pro")
+        st.info(display_text(row.get("gemini_pro_FullAnswer", "")))
 # =========================
 # 데이터 로드 & 검증
 # =========================
