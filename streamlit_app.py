@@ -117,4 +117,11 @@ with tab3:
 with tab4:
     st.subheader("📁 Train Dataset Viewer")
     st.markdown("학습용으로 생성된 `train_dataset.csv` 파일 내용을 확인합니다.")
-    st.dataframe(train_df, use_container_width=True, height=600)
+
+    # 컬럼명 매핑
+    train_display_df = train_df.rename(columns={
+        "Unnamed: 0": "Model",
+        "GT": "answer_kor"
+    })
+
+    st.dataframe(train_display_df, use_container_width=True, height=600)
