@@ -117,8 +117,13 @@ with tab3:
     st.subheader("📊 LLM 전체 성능 요약")
     st.markdown("각 LLM별 성능 요약 메트릭을 비교해보세요.")
 
-    display_df = summary_df.copy().set_index("Model")
-    styled = display_df.style.highlight_max(axis=0, color='red', props="font-weight:bold")
+    summary_df = pd.read_csv(SUMMARY_CSV)
+    summary_df["Model"] = summary_df["Model"].str.strip()
+    summary_df = summary_df.replace("N/A", pd.NA)
+    summary_df = summary_df.apply(pd.to_numeric, errors="ignore")
+    summary_df = summary_df.set_index("Model")
+
+    styled = summary_df.style.highlight_max(axis=0, color='red', props="font-weight:bold")
     st.dataframe(styled, use_container_width=True, height=400)
 
 with tab4:
