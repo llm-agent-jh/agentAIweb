@@ -11,7 +11,7 @@ st.title("📄 LLM FullAnswer vs Ground Truth")
 # 파일 경로
 # =========================
 INMODEL_CSV  = "rag_eval_with_all_models_wo_summary_with_gemini.csv"
-OUTMODEL_CSV = "rag_eval_with_all_models_out_of_model.csv"
+OUTMODEL_CSV = "rag_eval_with_all_models_out_of_model_with_gemini.csv"
 SUMMARY_CSV  = "llm_summary_metrics.csv"
 TRAIN_CSV    = "train_dataset.csv" 
 
