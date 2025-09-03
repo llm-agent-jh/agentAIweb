@@ -87,11 +87,11 @@ def render_block(label: str, df: pd.DataFrame):
 in_df      = load_csv(INMODEL_CSV)
 out_df     = load_csv(OUTMODEL_CSV)
 summary_df = load_csv(SUMMARY_CSV)
-train_df   = load_csv(TRAIN_CSV)  # 👈 NEW 추가
+train_df   = load_csv(TRAIN_CSV)  # ✅ train_dataset.csv
 
+# 기존 평가용 데이터만 검증
 check_required(in_df, "In-Model")
 check_required(out_df, "Out-of-Model")
-check_required(train_df, "Train Dataset")  # 👈 NEW 추가
 
 # =========================
 # 탭 렌더링
@@ -116,5 +116,5 @@ with tab3:
 
 with tab4:
     st.subheader("📁 Train Dataset Viewer")
-    st.markdown("학습용으로 생성된 train_dataset.csv 파일 내용을 확인합니다.")
+    st.markdown("학습용으로 생성된 `train_dataset.csv` 파일 내용을 확인합니다.")
     st.dataframe(train_df, use_container_width=True, height=600)
