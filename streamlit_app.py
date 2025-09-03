@@ -111,7 +111,9 @@ with tab3:
 
     # 지표 시각화 표
     display_df = summary_df.copy()
-    display_df.columns = display_df.columns.str.replace("_", " ").str.title()
-    st.dataframe(display_df, use_container_width=True, height=400)
+    display_df = display_df.set_index("Model")  # 모델명을 인덱스로 설정
 
-    st.caption("⬆️ Top@3 RAG, Top@1 Accuracy, Cosine Similarity, ROUGE1/2/L 등의 주요 지표입니다.")
+    # 숫자 열만 대상으로 max 강조 스타일 적용
+    styled = display_df.style.highlight_max(axis=0, color='red', props="font-weight:bold")
+
+    st.dataframe(styled, use_container_width=True, height=400)
