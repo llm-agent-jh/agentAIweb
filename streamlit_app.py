@@ -123,7 +123,18 @@ with tab3:
     summary_df = summary_df.apply(pd.to_numeric, errors="ignore")
     summary_df = summary_df.set_index("Model")
 
-    styled = summary_df.style.highlight_max(axis=0, color='red', props="font-weight:bold")
+    # 🎨 스타일링: 파란색 강조할 열
+    blue_columns = ["Top1_Accuracy_RAG", "Top1_Accuracy_NoRAG", "Out_of_Model_Top1_RAG", "Out_of_Model_Top1_NoRAG"]
+
+    def highlight_blue(val):
+        return 'background-color: #cce5ff'  # 밝은 파란색 배경
+
+    styled = summary_df.style
+    styled = styled.highlight_max(axis=0, color='red', props="font-weight:bold")
+    for col in blue_columns:
+        if col in summary_df.columns:
+            styled = styled.applymap(highlight_blue, subset=pd.IndexSlice[:, [col]])
+
     st.dataframe(styled, use_container_width=True, height=400)
 
 with tab4:
